@@ -1,0 +1,282 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require dataTables/jquery.dataTables
+ *= require dataTables/extras/dataTables.responsive
+ *= require material_icons
+ */
+
+
+@import "materialize/components/color-variables";
+$primary-color: color("grey", "darken-1") !default;
+$secondary-color: color("teal", "base") !default;
+@import 'materialize';
+
+body, html {
+  height: 100%;
+  max-width: 100%;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+body.out {
+  background-image: url('https://jhnutricion.com/imgEserciziEVF/images/bg-fitness.png');
+  min-height: 100vh;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+}
+
+.home-logo {
+  height: 100px;
+  margin: 1em -2em;
+}
+
+.app-logo {
+  height: 1.8em;
+  margin: 0.05em 0;
+  padding: 0.1em 0.4em !important;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0px !important;
+}
+
+.white-text input {
+  color: white;
+}
+
+.web-content {
+  margin-left: 0px;
+}
+
+.teal-text input {
+  color: teal;
+}
+
+.text-head {
+  text-shadow: 2px 2px 4px #000000;
+  position: absolute;
+  bottom: 0px;
+}
+
+.devise-errors-list {
+  list-style-type: unset !important;
+  padding-left: 2em !important;
+}
+
+.devise-errors-list li {
+  list-style-type: unset !important;
+}
+
+@media only screen and (min-width: 601px) {
+  .navbar-fixed {
+    height: 64px;
+  }
+}
+
+.logo-head {
+  position: absolute !important;
+  left: 0px;
+}
+
+.user-view {
+  padding-bottom: 272px !important;
+}
+
+.user-view .background {
+  bottom: -18px !important;
+  top: initial !important;
+}
+
+@media only screen and (min-width: 992px) {
+  .web-content {
+    margin-left: 301px;
+  }
+}
+
+/*
+.navbar-fixed {
+ z-index: 9999!important;
+}
+.sidenav-fixed {
+ margin-top: 56px;
+}
+*/
+
+.select2 .selection .select2-selection--single, .select2-container--default .select2-search--dropdown .select2-search__field {
+  border-width: 0 0 1px 0 !important;
+  border-radius: 0 !important;
+  height: 2.05rem;
+}
+
+.select2-container--default .select2-selection--multiple, .select2-container--default.select2-container--focus .select2-selection--multiple {
+  border-width: 0 0 1px 0 !important;
+  border-radius: 0 !important;
+}
+
+.select2-results__option {
+  color: #009688;
+  padding: 8px 16px;
+  font-size: 16px;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: #eee !important;
+  color: #009688 !important;
+}
+
+.select2-container--default .select2-results__option[aria-selected=true] {
+  background-color: #e1e1e1 !important;
+}
+
+.select2-dropdown {
+  border: none !important;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.select2-container--default .select2-results__option[role=group] .select2-results__group {
+  background-color: #333333;
+  color: #fff;
+}
+
+.select2-container .select2-search--inline .select2-search__field {
+  margin-top: 0 !important;
+}
+
+.select2-container .select2-search--inline .select2-search__field:focus {
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+.select2-container .select2-selection--multiple {
+  min-height: 2.05rem !important;
+}
+
+.select2-container--default.select2-container--disabled .select2-selection--single {
+  background-color: #ddd !important;
+  color: rgba(0, 0, 0, 0.26);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.26);
+}
+
+.select2-container {
+  width: 100% !important;
+}
+
+.pagination a li {
+  padding: 3px 10px !important;
+}
+
+.pagination a li.active {
+  color: #fff;
+}
+
+.number-noti {
+  position: absolute;
+  top: 1px;
+  color: #009688;
+  left: 43%;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+.link_email_plan {
+  font-size: 0.8em;
+}
+
+.plan-card-icons i {
+  margin: 0px 4%;
+}
+
+.card-action-teal {
+  border-top: 1px solid rgb(61, 140, 127) !important;
+}
+
+.user-active {
+  background-color: #f9f9f9 !important;
+}
+
+ul.browser-default li {
+  list-style-type: initial;
+}
+
+a:link {
+  color: #343434;
+}
+
+a:visited {
+  color: #000000;
+}
+
+a:hover {
+  color: #000000;
+}
+
+a:active {
+  color: #000000;
+}
+
+
+.white-link:link {
+  color: #ffffff;
+}
+
+.white-link:visited {
+  color: #ffffff;
+}
+
+.white-link:hover {
+  color: #fffff;
+}
+
+.white-link:active {
+  color: #ffffff;
+}
+
+.display-block {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.padding-td {
+  padding: 15px 5px;
+}
+
+.no-padding {
+  padding: 0px;
+}
+
+.h5-padding {
+  margin: 1.0933333333rem 0 0.656rem 0;
+}
+
+.food-image {
+  height: 7em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1em;
+  filter: invert(0.4);
+}
+
+.small-margin-top {
+  margin-top: 0.5em;
+}
