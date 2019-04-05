@@ -1,0 +1,98 @@
+!!!
+%html{:lang => "es"}
+  %head
+    %meta{:content => "es", "http-equiv" => "Content-Language"}/
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %title IntegralFitness
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body.grey.lighten-5
+    - flash.each do |message_type, message|
+      = javascript_tag "M.toast({html: '#{message}'})"
+    #modal1.modal
+      .modal-content
+        %h5 Planes para renovar hoy:
+        // -@all_plans.each do |plan|
+        //   %b=plan.user.name.to_s
+        //   =link_to "[Crear]", new_plan_path(user_id: plan.user.id)
+        //   %small
+        //     %ul.browser-default
+        //       %li=plan.user.email.to_s
+        //       -if plan.user.contact
+        //         %li=plan.user.contact.to_s
+      .modal-footer
+        %a.modal-close.waves-effect.waves-green.btn-flat Ok
+    .navbar-fixed
+      %nav
+        .nav-wrapper
+          %a.button-collapse.sidenav-trigger.text-white.white-link#sidenav{"data-target" => "slide-out", "data-turbolinks" => "false", "href"=> "#"}
+            %i.material-icons menu
+          %ul.left
+            -if current_user
+              %li.tooltipped{'data-tooltip' => "Crear Plan"}
+                =link_to user_session_path do               
+                  %i.material-icons.white-text library_add
+          =link_to user_session_path do
+            =image_tag $base_url.to_s + 'imgEserciziEVF/images/logoweb.png', class: 'app-logo brand-logo'
+          %ul.right
+            //- if !current_user.admin?
+            //  %li.tooltipped{'data-tooltip' => "Lista de Usuarios"}
+            //    =link_to users_path do               
+            //      %i.material-icons.white-text group_add
+            - if current_user
+              %li.tooltipped{'data-tooltip' => "Crear Asesorado"}
+                =link_to new_user_session_path do               
+                  %i.material-icons.white-text group_add
+              %li.tooltipped{'data-tooltip' => "Cerrar Sesión", 'data-position' => "left" }
+                = link_to destroy_user_session_path, method: :delete do
+                  %i.material-icons.white-text> exit_to_app
+            -else
+              %li.tooltipped{'data-tooltip' => "Inicia Sesión", 'data-position' => "left" }
+                = link_to new_user_session_path do
+                  %i.material-icons.white-text> person
+    %ul#slide-out.sidenav.sidenav-fixed
+      %li
+        .user-view
+          .background
+            =image_tag $base_url.to_s + 'imgEserciziEVF/images/bg-head.jpg', class: 'responsive-img'
+          =image_tag $base_url.to_s + 'imgEserciziEVF/images/logo-header.png', class: 'responsive-img logo-head'
+          -if current_user
+            .text-head.tooltipped{'data-tooltip' => "Editar usuario", 'data-position' => "top"}
+              = link_to edit_user_registration_path do
+                %span.white-text.name= current_user.name.to_s.titleize
+                %span.white-text.email= current_user.email.to_s.downcase
+      -if current_user
+        %li
+          = link_to new_user_session_path, {class: 'tooltipped', 'data-tooltip' => "¡Lista de Planes!", 'data-position' => "right"} do
+            %i.material-icons> filter_none
+            Planes
+        %li
+          .divider
+      %li
+        %a.subheader Base de Datos
+      %li
+        = link_to new_user_session_path, {class: 'tooltipped', 'data-tooltip' => "¡Conoce nuestros Alimentos!", 'data-position' => "right"} do
+          %i.material-icons> shopping_cart
+          Nutrición        
+      %li
+        = link_to new_user_session_path, {class: 'tooltipped', 'data-tooltip' => "¡Conoce nuestros Ejercicios!", 'data-position' => "right"}  do
+          %i.material-icons> fitness_center
+          Entrenamiento
+    .web-content
+      .container{:style => "padding-top:3em;"}
+        = yield
+      .center-align
+        %a.black-text{:href => "https://github.com/cejaramillof", :target => "_blank"}
+          %small
+            Powered by
+            %b
+              CEJARAMILLOF
+      %br/
+// -if @all_plans.count > 0
+//   .fixed-action-btn
+//     %a.btn-floating.modal-trigger.waves-effect.waves-light.btn-large.teal.pulse{"data-target" => "modal1"}
+//       %span.number-noti= @all_plans.count
+//       %i.material-icons notifications

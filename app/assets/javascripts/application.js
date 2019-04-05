@@ -40,6 +40,7 @@ $(document).on("turbolinks:load", function() {
     $('.tooltipped').tooltip();
     $('.sidenav').sidenav();
     M.updateTextFields();
+    console.log('xd');
     $('.datepicker').datepicker({
         firstDay: true,
         format: 'yyyy-mm-dd',

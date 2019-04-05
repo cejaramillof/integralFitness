@@ -1,0 +1,27 @@
+.row
+  .col.s12.m12.l10.offset-l1
+    .card
+      .card-content
+        .center-align
+          %span.card-title Edita tu usuario
+        .row
+          = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+            = render "devise/shared/error_messages", resource: resource
+            .col.s12.m6.input-field
+              %i.material-icons.prefix person
+              =f.text_field :name, class: 'validate', required: true, autofocus: true, autocomplete: "name"
+              %label{:for => "user_name"} Nombre
+            .col.s12.m6.input-field
+              %i.material-icons.prefix phone
+              =f.telephone_field :phone, class: 'validate', required: true, autocomplete: "phone"
+              %label{:for => "user_phone"} Teléfono    
+            .col.s12.m6.input-field
+              %i.material-icons.prefix mail
+              =f.email_field :email, class: 'validate', required: true, autocomplete: "email"
+              %label{:for => "user_email"} Correo
+            .col.s12.m6.input-field
+              %i.material-icons.prefix lock
+              =f.password_field :password, class: 'validate'
+              %label{:for => "user_password"} Contraseña
+            .col.s12.center-align
+              =f.button 'Guardar', class: 'waves-effect waves-teal btn-flat teal-text tooltipped', 'data-tooltip' => "Modifica tu Usuario", type: :submit

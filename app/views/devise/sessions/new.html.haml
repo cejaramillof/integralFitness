@@ -1,0 +1,19 @@
+.row
+  .col.s12.m8.offset-m2.xl6.offset-xl3
+    .card
+      .card-content
+        .center-align
+          %span.card-title Inicia sesión
+        =link_to new_user_registration_path, {class: "btn-large btn-floating halfway-fab waves-effect waves-light activator tooltipped", 'data-tooltip' => "¡Crea una cuenta!"} do
+          %i.large.material-icons person_add
+        = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+          .input-field
+            %i.material-icons.prefix account_circle
+            =f.email_field :email, class: 'validate', required: true, autofocus: true, autocomplete: "email"
+            %label{:for => "user_email"} Correo
+          .input-field
+            %i.material-icons.prefix lock
+            =f.password_field :password, class: 'validate', required: true
+            %label{:for => "user_password"} Contraseña
+            .row.center-align
+              =f.button 'Entrar', class: 'waves-effect waves-teal btn-flat teal-text tooltipped', 'data-tooltip' => "¡Bienvenido a la Evolución!", type: :submit
