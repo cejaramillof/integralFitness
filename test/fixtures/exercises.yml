@@ -1,0 +1,37 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  codice: 1
+  descrizione: MyString
+  immagine: MyString
+  nomeimmagine: MyString
+  gruppo1: 1
+  gruppo2: 1
+  accesso: 1
+  livello: 1
+  fotoGA: MyString
+  fotoGB: MyString
+  fotoA: MyString
+  fotoB: MyString
+  mappa: MyString
+  mappe: MyString
+  video: MyString
+  codicegruppo1: 1
+
+two:
+  codice: 1
+  descrizione: MyString
+  immagine: MyString
+  nomeimmagine: MyString
+  gruppo1: 1
+  gruppo2: 1
+  accesso: 1
+  livello: 1
+  fotoGA: MyString
+  fotoGB: MyString
+  fotoA: MyString
+  fotoB: MyString
+  mappa: MyString
+  mappe: MyString
+  video: MyString
+  codicegruppo1: 1

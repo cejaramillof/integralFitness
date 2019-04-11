@@ -1,0 +1,19 @@
+.center-align
+  .row
+    =link_to "#modal10", class: 'modal-trigger' do
+      %h6.card-title 
+        = @exercise.descrizione
+      %h6
+        %small (Click aquí para ver la Activación Muscular)
+    %br/
+    .col.s6
+      = image_tag($base_url.to_s + @exercise.fotoA.to_s, class: "responsive-img")
+    .col.s6
+      = image_tag($base_url.to_s + @exercise.fotoB.to_s, class: "responsive-img")
+  .row
+    .col.s12
+      = video_tag $base_url.to_s + @exercise.video, controls: false, autoplay: true, muted: true, loop: true, width: "80%", height: "100%", class: "", style: "border: 1px solid gainsboro;"
+/ Modal Structure
+#modal10.modal.bottom-sheet{style: "max-height: 70%;background-color: white;"}
+  .modal-content.center-align
+    %p= image_tag($base_url.to_s + @exercise.mappe.to_s, class: "responsive-img")
