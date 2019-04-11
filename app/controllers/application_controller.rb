@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
   # "https://evolutionfitimg.teamsystem.com/"
   $base_url = MUSCLE_BASE_URL
   
+  #check if user is admin
+  def authenticate_admin!
+    redirect_to '/', alert: 'No estas autorizado.' unless current_user.try(:admin?)
+  end
+  
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :phone, :email, :password])

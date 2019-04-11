@@ -4,12 +4,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   attr_reader :active
+  attr_reader :months
+  has_many :guests, dependent: :destroy
+  has_many :plans
   
   def active
     !self.premium.blank? && self.premium >= Time.now.to_date || self.admin
   end
   
   def active_for_authentication?
-   super && active || admin
+    super && active || admin
   end         
 end

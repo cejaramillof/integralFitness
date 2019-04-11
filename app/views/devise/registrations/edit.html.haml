@@ -21,7 +21,7 @@
               %label{:for => "user_email"} Correo
             .col.s12.m6.input-field
               %i.material-icons.prefix lock
-              =f.password_field :password, class: 'validate'
+              =f.password_field :password, class: 'validate', required: true
               %label{:for => "user_password"} Contraseña
             .col.s12.center-align
               =f.button 'Guardar', class: 'waves-effect waves-teal btn-flat teal-text tooltipped', 'data-tooltip' => "Modifica tu Usuario", type: :submit

@@ -1,0 +1,60 @@
+= form_for @plan do |f|
+  - if @plan.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@plan.errors.count, "error")} prohibited this plan from being saved:"
+      %ul
+        - @plan.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :user
+    = f.text_field :user
+  .field
+    = f.label :guest
+    = f.text_field :guest
+    = f.label :guest, 'Correo del Asesorado'
+    = f.select :guest_id, @guests.collect{ |u| [u.email, u.id] }, selected: @default || nil    
+  .field
+    = f.label :weight
+    = f.text_field :weight
+  .field
+    = f.label :fat
+    = f.text_field :fat
+  .field
+    = f.label :activity
+    = f.number_field :activity
+  .field
+    = f.label :goal
+    = f.number_field :goal
+  .field
+    = f.label :muscle_mass
+    = f.text_field :muscle_mass
+  .field
+    = f.label :fat_mass
+    = f.text_field :fat_mass
+  .field
+    = f.label :skeletal_mass
+    = f.text_field :skeletal_mass
+  .field
+    = f.label :residual_mass
+    = f.text_field :residual_mass
+  .field
+    = f.label :lean_mass
+    = f.text_field :lean_mass
+  .field
+    = f.label :kcal
+    = f.number_field :kcal
+  .field
+    = f.label :proteins
+    = f.number_field :proteins
+  .field
+    = f.label :carbs
+    = f.number_field :carbs
+  .field
+    = f.label :carbs
+    = f.number_field :carbs
+  .field
+    = f.label :description
+    = f.text_area :description
+  .actions
+    = f.submit 'Save'

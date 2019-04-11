@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require jquery
 //= require jquery.turbolinks
+//= require jquery_ujs
 //= require dataTables/jquery.dataTables
 //= require dataTables/extras/dataTables.responsive
 //= require materialize
@@ -27,7 +28,14 @@ $(document).on("turbolinks:before-visit turbolinks:before-cache", function() {
         e.destroy()
 });
 
-$(document).on("turbolinks:load", function() {    
+$(document).on("turbolinks:load", function() {  
+    $('.datatable').DataTable({
+        pagingType: 'simple',
+        language: {
+            searchPlaceholder: "CC, Nombre, Celular o Email",
+            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+        }
+    });
     M.Modal._count = 0;
     $('select').select2({
         language: {
@@ -40,7 +48,6 @@ $(document).on("turbolinks:load", function() {
     $('.tooltipped').tooltip();
     $('.sidenav').sidenav();
     M.updateTextFields();
-    console.log('xd');
     $('.datepicker').datepicker({
         firstDay: true,
         format: 'yyyy-mm-dd',

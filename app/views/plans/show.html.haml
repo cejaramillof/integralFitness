@@ -1,0 +1,54 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @plan.user
+%p
+  %b Guest:
+  = @plan.guest
+%p
+  %b Weight:
+  = @plan.weight
+%p
+  %b Fat:
+  = @plan.fat
+%p
+  %b Activity:
+  = @plan.activity
+%p
+  %b Goal:
+  = @plan.goal
+%p
+  %b Muscle mass:
+  = @plan.muscle_mass
+%p
+  %b Fat mass:
+  = @plan.fat_mass
+%p
+  %b Skeletal mass:
+  = @plan.skeletal_mass
+%p
+  %b Residual mass:
+  = @plan.residual_mass
+%p
+  %b Lean mass:
+  = @plan.lean_mass
+%p
+  %b Kcal:
+  = @plan.kcal
+%p
+  %b Proteins:
+  = @plan.proteins
+%p
+  %b Carbs:
+  = @plan.carbs
+%p
+  %b Carbs:
+  = @plan.carbs
+%p
+  %b Description:
+  = @plan.description
+
+= link_to 'Edit', edit_plan_path(@plan)
+\|
+= link_to 'Back', plans_path

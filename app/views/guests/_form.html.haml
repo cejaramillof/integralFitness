@@ -1,0 +1,57 @@
+= form_for @guest do |f|
+  - if @guest.errors.any?
+    .row#error_explanation
+      .col.s12
+        %b= "#{pluralize(@guest.errors.count, "error")} evitaron que fuera guardado:"
+        %ul
+          - @guest.errors.full_messages.each do |message|
+            %li
+              %b -
+              = message
+  .row
+    .input-field.col.s12.l6
+      %i.material-icons.prefix featured_video
+      =f.number_field :cc, class: 'validate', required: true, autofocus: true, autocomplete: "ID"
+      %label{:for => "guest_cc"} Cédula
+    .input-field.col.s12.l6
+      %i.material-icons.prefix account_circle
+      =f.text_field :name, class: 'validate', required: true, autocomplete: "name"
+      %label{:for => "guest_name"} Nombre
+  .row
+    .input-field.col.s12.l6
+      %i.material-icons.prefix email
+      =f.text_field :email, class: 'validate', required: true, autocomplete: "email"
+      %label{:for => "guest_email"} Correo
+    .input-field.col.s12.l6
+      %i.material-icons.prefix local_phone
+      =f.text_field :phone, class: 'validate', required: true, autocomplete: "phone"
+      %label{:for => "guest_phone"} Teléfono
+  .row
+    .input-field.col.s12.l6
+      %i.material-icons.prefix vertical_align_top
+      =f.number_field :height, class: 'validate', required: true, autocomplete: "height", min: 100, max: 250
+      %label{:for => "guest_height"} Altura (CM)
+    .input-field.col.s12.l6
+      %i.material-icons.prefix wc
+      %label{class: "active"} Genero
+      -#Guest.genders.keys.each do |genero|
+      %label{style: 'top: 0.5rem;position: relative'}
+        = f.radio_button :gender, true, class: "with-gap"
+        %span Mujer
+      %label{style: 'top: 0.5rem;position: relative'}
+        = f.radio_button :gender, false, class: "with-gap"
+        %span Hombre        
+  .row
+    .input-field.col.s12.l6
+      %label{class: "active"} Fecha de Nacimiento
+      %br
+      .col.s10.offset-s1
+        = f.date_select :dob, {required: true, :start_year => Date.current.year, :end_year => 1920, :use_month_names => ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre','Diciembre']}
+    .input-field.col.s12.l6
+      %label{class: "active"} Fecha Próximo Plan
+      %br
+      .col.s10.offset-s1
+        = f.date_select :next, {:start_year => Date.current.year,:start_month => Date.current.month + 1.month, :use_month_names => ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre','Diciembre']}
+  .col.s12.m12
+    .actions.center-align
+      =f.button 'Guardar', class: 'btn waves-effect waves-light white-text', type: :submit

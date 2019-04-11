@@ -95,10 +95,12 @@ body.out {
 .logo-head {
   position: absolute !important;
   left: 0px;
+  padding-right: 4em;
+  padding-left: 6em;  
 }
 
 .user-view {
-  padding-bottom: 272px !important;
+  padding-bottom: 170px !important;
 }
 
 .user-view .background {
@@ -264,6 +266,10 @@ a:active {
   padding: 0px;
 }
 
+.no-margin {
+  margin: 0px;
+}
+
 .h5-padding {
   margin: 1.0933333333rem 0 0.656rem 0;
 }
@@ -279,4 +285,8 @@ a:active {
 
 .small-margin-top {
   margin-top: 0.5em;
+}
+
+.select2-container--default {
+  width: 32%!important;
 }

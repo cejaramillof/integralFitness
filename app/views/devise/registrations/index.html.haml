@@ -1,0 +1,38 @@
+
+.row
+  .col.s12
+    .card
+      .card-content
+        .center-align
+          %span.card-title.no-margin-bottom Lista de usuarios
+      .container
+        .row
+          %table.center-align.datatable.nowrap{:id => "display no-wrap"}
+            %thead
+              %tr
+                %th.hide
+                %th.hide
+                %th.hide
+                %th Email
+                %th Hasta:
+            %tbody
+              - @users.each do |user|
+                %tr{class: user.active ? 'user-active' : nil}
+                  %th.hide= user.name
+                  %th.hide= user.phone
+                  %th.hide= user.email
+                  %th
+                    %p.no-padding.no-margin= user.email.try(:capitalize)
+                    %small
+                      %p.no-margin
+                        = user.name.try(:titleize)
+                      %p.no-margin
+                        = user.phone
+                  %th
+                    = form_for(user, url: users_list_path(id: user.id), method: :post, :format => :js, remote: true, html: { :class => 'center-align admin-edit-user' }) do |f|
+                      .valign-wrapper
+                        = f.number_field :months, style: "width: 100%;", placeholder: "Número de meses"
+                        = f.button :submit, type: 'submit', style: "cursor: pointer;background: transparent;border: 0px;outline: 0;" do
+                          %i.material-icons.small.teal-text check_circle
+                      = f.date_field :premium, class: "", style: "width: 100%;"
+      %br/

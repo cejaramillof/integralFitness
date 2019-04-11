@@ -1,0 +1,35 @@
+.row
+  .col.s12.m12.l12
+    .card
+      .card-content
+        .center-align
+          %span.card-title Lista de Asesorados
+          %small (Click en el nombre para editar)
+        .row
+          %table.center-align.datatable.striped.nowrap{:id => "display no-wrap"}
+            %thead
+              %tr
+                %th.hide Cedula
+                %th.hide Email
+                %th Nombre
+                %th.hide Phone
+                %th Próximo Plan
+                %th
+          
+            %tbody
+              - @guests.each do |guest|
+                %tr
+                  %td.hide= guest.cc
+                  %td.hide= guest.email
+                  %td
+                    = link_to edit_guest_path(guest) do
+                      %p= guest.name.titleize
+                  %td.hide= guest.phone
+                  %td= guest.next
+                  %td.center-align
+                    = link_to guest, method: :delete, data: { confirm: '¿Estas seguro que deseas eliminar este asesorado?' } do
+                      %i.material-icons.black-text delete_forever
+
+%br
+
+= link_to 'New Guest', new_guest_path

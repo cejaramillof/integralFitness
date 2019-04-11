@@ -32,23 +32,23 @@
             %i.material-icons menu
           %ul.left
             -if current_user
-              %li.tooltipped{'data-tooltip' => "Crear Plan"}
+              %li.tooltipped{'data-tooltip' => "Crear Plan", 'data-position' => "right"}
                 =link_to user_session_path do               
-                  %i.material-icons.white-text library_add
+                  %i.material-icons.white-text create_new_folder
           =link_to user_session_path do
             =image_tag $base_url.to_s + 'imgEserciziEVF/images/logoweb.png', class: 'app-logo brand-logo'
           %ul.right
-            //- if !current_user.admin?
-            //  %li.tooltipped{'data-tooltip' => "Lista de Usuarios"}
-            //    =link_to users_path do               
-            //      %i.material-icons.white-text group_add
             - if current_user
-              %li.tooltipped{'data-tooltip' => "Crear Asesorado"}
-                =link_to new_user_session_path do               
-                  %i.material-icons.white-text group_add
+              %li.hide-on-med-and-down.tooltipped{'data-tooltip' => "Crear Plan", 'data-position' => "left"}
+                =link_to user_session_path do               
+                  %i.material-icons.white-text create_new_folder                    
+              %li.tooltipped{'data-tooltip' => "Crear Asesorado", 'data-position' => "left" }
+                =link_to new_guest_path do               
+                  %i.material-icons.white-text group_add                    
               %li.tooltipped{'data-tooltip' => "Cerrar Sesión", 'data-position' => "left" }
                 = link_to destroy_user_session_path, method: :delete do
                   %i.material-icons.white-text> exit_to_app
+
             -else
               %li.tooltipped{'data-tooltip' => "Inicia Sesión", 'data-position' => "left" }
                 = link_to new_user_session_path do
@@ -58,17 +58,27 @@
         .user-view
           .background
             =image_tag $base_url.to_s + 'imgEserciziEVF/images/bg-head.jpg', class: 'responsive-img'
-          =image_tag $base_url.to_s + 'imgEserciziEVF/images/logo-header.png', class: 'responsive-img logo-head'
+          //=image_tag $base_url.to_s + 'imgEserciziEVF/images/logo-header.png', class: 'responsive-img logo-head'
+          =image_tag 'https://i.imgur.com/GrbpxTL.png', class: 'responsive-img logo-head'
           -if current_user
             .text-head.tooltipped{'data-tooltip' => "Editar usuario", 'data-position' => "top"}
               = link_to edit_user_registration_path do
                 %span.white-text.name= current_user.name.to_s.titleize
                 %span.white-text.email= current_user.email.to_s.downcase
       -if current_user
+        - if current_user.admin?
+          %li
+            = link_to users_path, {class: 'tooltipped', 'data-tooltip' => "¡Lista de Nutricionistas!", 'data-position' => "right"} do
+              %i.material-icons> star
+              Nutricionistas      
         %li
-          = link_to new_user_session_path, {class: 'tooltipped', 'data-tooltip' => "¡Lista de Planes!", 'data-position' => "right"} do
-            %i.material-icons> filter_none
+          = link_to users_path, {class: 'tooltipped', 'data-tooltip' => "¡Lista de Planes!", 'data-position' => "right"} do
+            %i.material-icons> folder_shared
             Planes
+        %li
+          = link_to guests_path, {class: 'tooltipped', 'data-tooltip' => "¡Lista de Asesorados!", 'data-position' => "right"} do
+            %i.material-icons> people
+            Asesorados
         %li
           .divider
       %li
