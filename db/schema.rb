@@ -10,10 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_11_021554) do
+ActiveRecord::Schema.define(version: 2019_04_11_030718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "exercises", force: :cascade do |t|
+    t.integer "codice"
+    t.string "descrizione"
+    t.string "immagine"
+    t.string "nomeimmagine"
+    t.integer "gruppo1"
+    t.integer "gruppo2"
+    t.integer "accesso"
+    t.integer "livello"
+    t.string "fotoGA"
+    t.string "fotoGB"
+    t.string "fotoA"
+    t.string "fotoB"
+    t.string "mappa"
+    t.string "mappe"
+    t.string "video"
+    t.integer "codicegruppo1"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "foods", force: :cascade do |t|
+    t.string "name"
+    t.string "status"
+    t.string "group"
+    t.string "carbohydrates"
+    t.string "proteins"
+    t.string "fats"
+    t.boolean "default"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_foods_on_user_id"
+  end
 
   create_table "guests", force: :cascade do |t|
     t.string "cc"
@@ -68,6 +103,7 @@ ActiveRecord::Schema.define(version: 2019_04_11_021554) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "foods", "users"
   add_foreign_key "guests", "users"
   add_foreign_key "plans", "guests"
   add_foreign_key "plans", "users"

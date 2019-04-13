@@ -7,6 +7,7 @@ class User < ApplicationRecord
   attr_reader :months
   has_many :guests, dependent: :destroy
   has_many :plans
+  has_many :foods, dependent: :destroy
   
   def active
     !self.premium.blank? && self.premium >= Time.now.to_date || self.admin

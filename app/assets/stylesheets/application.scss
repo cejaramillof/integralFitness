@@ -290,3 +290,17 @@ a:active {
 .select2-container--default {
   width: 32%!important;
 }
+
+#new_food > div:nth-child(5) > div:nth-child(2) > span {
+  width: 100%!important;
+}
+
+.float-right-top {
+  position: absolute;
+  right: 1em;
+  top: 1em;
+}
+
+#new_plan > div:nth-child(4) > div > span {
+  width: 100%!important;
+}

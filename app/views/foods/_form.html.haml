@@ -1,0 +1,36 @@
+= form_for @food do |f|
+  - if @food.errors.any?
+    .row#error_explanation
+      .col.s12
+        %b= "#{pluralize(@food.errors.count, "error")} evitaron que fuera guardado:"
+        %ul
+          - @food.errors.full_messages.each do |message|
+            %li
+              %b -
+              = message
+  .row
+    .input-field.col.s12.l6
+      =f.text_field :name, class: 'validate', required: true, autofocus: true
+      %label{:for => "food_name"} Nombre
+    .input-field.col.s12.l6
+      =f.text_field :status, class: 'validate', required: true
+      %label{:for => "food_status"} Estado del Alimento
+  .row
+    .input-field.col.s12.l6
+      =f.number_field :carbohydrates, class: 'validate', required: true, :step => 0.1
+      %label{:for => "food_carbohydrates"} Carbohidratos (gr)  
+    .input-field.col.s12.l6
+      =f.number_field :proteins, class: 'validate', required: true, :step => 0.1
+      %label{:for => "food_proteins"} Proteinas (gr)
+  .row      
+    .input-field.col.s12.l6
+      =f.number_field :fats, class: 'validate', required: true, :step => 0.1
+      %label{:for => "food_fats"} Grasas (gr)
+    .col.s12.l6.left-align
+      = f.label :group, 'Grupo alimenticio', class: 'active left-align'
+      %br/
+      = f.select :group, @groups.collect{ |u| [u] }, selected: @default || nil
+  - if current_user.admin
+    = f.hidden_field :default, value: true 
+  .actions
+    = f.submit 'Crear', class: 'btn waves-effect waves-light white-text'

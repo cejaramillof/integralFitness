@@ -1,51 +1,55 @@
-%h1 Listing plans
-
-%table
-  %thead
-    %tr
-      %th User
-      %th Guest
-      %th Weight
-      %th Fat
-      %th Activity
-      %th Goal
-      %th Muscle mass
-      %th Fat mass
-      %th Skeletal mass
-      %th Residual mass
-      %th Lean mass
-      %th Kcal
-      %th Proteins
-      %th Carbs
-      %th Carbs
-      %th Description
-      %th
-      %th
-      %th
-
-  %tbody
-    - @plans.each do |plan|
-      %tr
-        %td= plan.user
-        %td= plan.guest
-        %td= plan.weight
-        %td= plan.fat
-        %td= plan.activity
-        %td= plan.goal
-        %td= plan.muscle_mass
-        %td= plan.fat_mass
-        %td= plan.skeletal_mass
-        %td= plan.residual_mass
-        %td= plan.lean_mass
-        %td= plan.kcal
-        %td= plan.proteins
-        %td= plan.carbs
-        %td= plan.carbs
-        %td= plan.description
-        %td= link_to 'Show', plan
-        %td= link_to 'Edit', edit_plan_path(plan)
-        %td= link_to 'Destroy', plan, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Plan', new_plan_path
+.row
+  .col.s12
+    .card
+      .card-content
+        .row
+          .col.s8.left-align
+            %h5.center-align.card-title  Lista de Planes
+          .col.s4.right-align
+            = link_to new_plan_path, class: 'btn waves-effect waves-light btn-flat h5-padding' do
+              Crear
+        = form_tag(plans_path, method: :get) do
+          .row.center-align
+            .col.s9.center-align
+              = text_field_tag :email, params[:email], placeholder: 'Filtrar planes por Email'
+            .col.s3.center-align
+              = button_tag(:submit, name: nil, class: 'btn waves-effect waves-light white-text') do
+                %i.material-icons search
+        .container        
+        -if !@plans.empty?
+          .row.no-margin-bottom
+            - @plans.each do |plan|
+              .col.s12.m6
+                =link_to plan do
+                  .card.grey.lighten-5.black-text
+                    .card-content
+                      %span.card-title= plan.guest.name.to_s.titleize
+                      = link_to plan, method: :delete, class: 'float-right-top', data: { confirm: '¿Estas seguro que deseas eliminar este asesorado?' } do
+                        %i.material-icons.black-text delete_forever
+                      .center-align
+                        %small= plan.guest.email.to_s.downcase
+                      .row.center-align.no-margin-bottom
+                        .col.s6
+                          %small
+                            %b Creado
+                            %span= plan.created_at.strftime("%d/%m/%g")
+                        .col.s6
+                          %small
+                            %b Próximo
+                            %span= plan.guest.next&.strftime("%d/%m/%g")
+                    .card-action
+                      .row.no-margin-bottom.center-align.plan-card-icons
+                        .col.s2
+                          - case plan.goal
+                            - when "Definicion"
+                              %i.material-icons.tooltipped{'data-tooltip' => "Definición"} trending_down 
+                            - when "Mantenimiento"
+                              %i.material-icons.tooltipped{'data-tooltip' => "Mantenimiento"} trending_flat
+                            - when "Volumen"
+                              %i.material-icons.tooltipped{'data-tooltip' => "Volumen"} trending_up               
+                        .col.s10.right-align
+                          %i.material-icons.tooltipped{'data-tooltip' => "Nutricional"} restaurant
+                          %i.material-icons.tooltipped{'data-tooltip' => "Entrenamiento"} fitness_center
+                          //%i.material-icons local_hospital
+          .row.center-align.no-margin-bottom
+            = will_paginate @plans, inner_window: 0, outer_window: 0

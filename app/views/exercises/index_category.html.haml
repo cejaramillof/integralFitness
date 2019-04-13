@@ -1,12 +1,15 @@
 .row
-  %h5.center-align.card-title 
-    Lista de Ejercicios
-    %small
-      (
-      =params[:muscle]
-      )
-  %table.highlight.centered
-    - @exercises.each do |exercise|
-      %tr
-        %td.no-padding
-          = link_to exercise.descrizione, exercise, {class: 'display-block padding-td '}
+  .col.s12
+    .card
+      .card-content
+        %h5.center-align.card-title 
+          Lista de Ejercicios
+          %small
+            (
+            =params[:muscle]
+            )
+        %table.highlight.centered
+          - @exercises.each do |exercise|
+            %tr
+              %td.no-padding
+                = link_to exercise.descrizione, exercise, {class: 'display-block padding-td '}

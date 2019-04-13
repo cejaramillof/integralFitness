@@ -1,0 +1,32 @@
+.row
+  .col.s12
+    .card
+      .card-content.center-align
+        .col.s12.center-align
+          %h5.card-title
+            = @foods.first&.group
+            %br/
+            %small (100gramos)
+        .row  
+          %table.datatable.striped.responsive.no-wrap
+            %thead
+              %tr
+                %th
+                %th Nombre
+                %th Estado
+                %th Carbs
+                %th Prote
+                %th Grasas
+            %tbody
+              - @foods.each do |food|
+                %tr
+                  %th
+                  %td
+                    -if !food.user == current_user || current_user&.admin?
+                      = link_to food, method: :delete, data: { confirm: '¿Estas seguro?' } do
+                        %i.material-icons.black-text delete_forever  
+                    = food.name
+                  %td= food.status
+                  %td= food.carbohydrates
+                  %td= food.proteins
+                  %td= food.fats

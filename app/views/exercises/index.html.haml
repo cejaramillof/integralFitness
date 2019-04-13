@@ -1,10 +1,13 @@
 .row
-  %h5.center-align.card-title 
-    Lista de Ejercicios
-.row    
-  -@groups.each do |key, value|
-    .col.s6.m4.l4.xl2.center-align
-      = link_to :muscle => key  do
-        %b= key
-        =image_tag $base_url + "imgEserciziEVF/musculos/#{key}.png", class: 'responsive-img'
-  %br/
+  .col.s12
+    .card
+      .card-content
+        %h5.center-align.card-title 
+          Lista de Ejercicios
+        .row    
+          -@groups.each do |key, value|
+            .col.s6.m4.l4.xl2.center-align
+              = link_to :muscle => key  do
+                %b= key
+                =image_tag $base_url + "imgEserciziEVF/musculos/#{key}.png", class: 'responsive-img'
+          %br/

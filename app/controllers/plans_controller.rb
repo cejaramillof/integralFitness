@@ -6,7 +6,11 @@ class PlansController < ApplicationController
   # GET /plans
   # GET /plans.json
   def index
-    @plans = current_user.plans.all
+    @plans = if params[:email]
+      current_user.plans.where(guest: Guest.where('lower(email) LIKE ?', "%#{params[:email].downcase}%")).paginate(:page => params[:page], :per_page => 4).order('id DESC')
+    else
+      current_user.plans.all.paginate(:page => params[:page], :per_page => 4).order('id DESC')
+    end    
   end
 
   # GET /plans/1
@@ -18,37 +22,21 @@ class PlansController < ApplicationController
   def new
     @plan = Plan.new
     @guests = current_user.guests.all
-  end
-
-  # GET /plans/1/edit
-  def edit
+    @default = params[:user_id]
   end
 
   # POST /plans
   # POST /plans.json
   def create
     @plan = current_user.plans.new(plan_params)
-
+    @plan.guest.update(next: params[:plan][:next])
+    @guests = current_user.guests.all
     respond_to do |format|
-      if @plan.save
-        format.html { redirect_to @plan, notice: 'Plan was successfully created.' }
+      if @plan.save && @plan.guest.save
+        format.html { redirect_to @plan, notice: 'Plan creado.' }
         format.json { render :show, status: :created, location: @plan }
       else
         format.html { render :new }
-        format.json { render json: @plan.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /plans/1
-  # PATCH/PUT /plans/1.json
-  def update
-    respond_to do |format|
-      if @plan.update(plan_params)
-        format.html { redirect_to @plan, notice: 'Plan was successfully updated.' }
-        format.json { render :show, status: :ok, location: @plan }
-      else
-        format.html { render :edit }
         format.json { render json: @plan.errors, status: :unprocessable_entity }
       end
     end
@@ -59,7 +47,7 @@ class PlansController < ApplicationController
   def destroy
     @plan.destroy
     respond_to do |format|
-      format.html { redirect_to plans_url, notice: 'Plan was successfully destroyed.' }
+      format.html { redirect_to plans_url, notice: 'Plan eliminado.' }
       format.json { head :no_content }
     end
   end

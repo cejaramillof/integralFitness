@@ -1,0 +1,111 @@
+.row
+  .col.s12
+    .card
+      .card-content.center-align
+        %h5.center-align.card-title 
+          Lista de Alimentos
+        .row
+          .col.s6.m4.l4.xl3.center-align
+            = link_to foods_path(group: 'SUPLEMENTOS') do
+              %br/
+              %b Suplementos
+              =image_tag $base_url + "imgEserciziEVF/foods/suples.svg", class: 'food-image' 
+          .col.s6.m4.l4.xl3.center-align
+            = link_to foods_path(group: 'CEREALES') do
+              %br/
+              %b Cereales
+              =image_tag $base_url + "imgEserciziEVF/foods/cereales.svg", class: 'food-image'
+          .col.s6.m4.l4.xl3.center-align
+            = link_to foods_path(group: 'LEGUMINOSAS') do
+              %br/
+              %b Leguminosas
+              =image_tag $base_url + "imgEserciziEVF/foods/leguminosas.svg", class: 'food-image'
+          .col.s6.m4.l4.xl3.center-align
+            = link_to foods_path(group: 'TUBERCULOS Y HORTALIZAS') do
+              %br/
+              %b Tuberculos
+              =image_tag $base_url + "imgEserciziEVF/foods/tuberculos.svg", class: 'food-image'
+          .col.s6.m4.l4.xl3.center-align
+            = link_to foods_path(group: 'FRUTOS') do
+              %br/
+              %b Frutos
+              =image_tag $base_url + "imgEserciziEVF/foods/frutas.svg", class: 'food-image'
+          .col.s6.m4.l4.xl3.center-align
+            = link_to foods_path(group: 'FRUTOS SECOS') do
+              %br/
+              %b Frutos secos
+              =image_tag $base_url + "imgEserciziEVF/foods/frutos_secos.svg", class: 'food-image'
+          .col.s6.m4.l4.xl3.center-align
+            = link_to foods_path(group: 'LECHE Y DERIVADOS') do
+              %br/
+              %b Lacteos
+              =image_tag $base_url + "imgEserciziEVF/foods/leche.svg", class: 'food-image'
+          .col.s6.m4.l4.xl3.center-align
+            = link_to foods_path(group: 'HUEVOS') do
+              %br/
+              %b Huevos
+              =image_tag $base_url + "imgEserciziEVF/foods/huevos.svg", class: 'food-image'
+          .col.s6.m4.l4.xl3.center-align
+            = link_to foods_path(group: 'AZUCARES') do
+              %br/
+              %b Azucares
+              =image_tag $base_url + "imgEserciziEVF/foods/azucares.svg", class: 'food-image'
+          .col.s6.m4.l4.xl3.center-align
+            = link_to foods_path(group: 'ACEITES Y GRASAS') do
+              %br/
+              %b Grasas
+              =image_tag $base_url + "imgEserciziEVF/foods/grasas.svg", class: 'food-image'
+          .col.s6.m4.l4.xl3.center-align
+            = link_to foods_path(group: 'PESCADOS') do
+              %br/
+              %b Pescado
+              =image_tag $base_url + "imgEserciziEVF/foods/pescados.svg", class: 'food-image'
+          .col.s6.m4.l4.xl3.center-align
+            = link_to foods_path(group: 'CARNE') do
+              %br/
+              %b Carne
+              =image_tag $base_url + "imgEserciziEVF/foods/carne.svg", class: 'food-image'
+          .col.s6.m4.l4.xl3.center-align
+            = link_to foods_path(group: 'CERDO') do
+              %br/
+              %b Cerdo
+              =image_tag $base_url + "imgEserciziEVF/foods/cerdo.svg", class: 'food-image'   
+          .col.s6.m4.l4.xl3.center-align
+            = link_to foods_path(group: 'CORDERO') do
+              %br/
+              %b Cordero
+              =image_tag $base_url + "imgEserciziEVF/foods/cordero.svg", class: 'food-image'
+          .col.s6.m4.l4.xl3.center-align
+            = link_to foods_path(group: 'OVEJA') do
+              %br/
+              %b Oveja
+              =image_tag $base_url + "imgEserciziEVF/foods/oveja.svg", class: 'food-image'
+          .col.s6.m4.l4.xl3.center-align
+            = link_to foods_path(group: 'TERNERA') do
+              %br/
+              %b Ternera
+              =image_tag $base_url + "imgEserciziEVF/foods/ternero.svg", class: 'food-image'
+          .col.s6.m4.l4.xl3.center-align
+            = link_to foods_path(group: 'VACA') do
+              %br/
+              %b Vaca
+              =image_tag $base_url + "imgEserciziEVF/foods/vaca.svg", class: 'food-image'
+          .col.s6.m4.l4.xl3.center-align
+            = link_to foods_path(group: 'EMBUTIDOS') do
+              %br/
+              %b Embutidos
+              =image_tag $base_url + "imgEserciziEVF/foods/embutidos.svg", class: 'food-image'
+          .col.s6.m4.l4.xl3.center-align
+            = link_to foods_path(group: 'AVES') do
+              %br/
+              %b Aves
+              =image_tag $base_url + "imgEserciziEVF/foods/aves.svg", class: 'food-image'
+          .col.s6.m4.l4.xl3.center-align
+            = link_to foods_path(group: 'CAZA') do
+              %br/
+              %b Caza
+              =image_tag $base_url + "imgEserciziEVF/foods/caza.svg", class: 'food-image' 
+          .row.center-align
+          -if current_user
+            = link_to new_food_path, class: 'btn waves-effect waves-light h5-padding white-text' do
+              Crear Alimento

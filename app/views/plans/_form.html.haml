@@ -1,60 +1,120 @@
-= form_for @plan do |f|
-  - if @plan.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@plan.errors.count, "error")} prohibited this plan from being saved:"
-      %ul
-        - @plan.errors.full_messages.each do |message|
-          %li= message
+:javascript
+  $(document).on("keydown", "#plan_weight", function(e){
+     $(".medir-g").removeClass("disabled");
+     $(".medir-g").removeClass("disabled");
+  });  
+  $(document).on("change", "select#plan_guest_id", function(e){
+     asesorado = $("select#plan_guest_id").val();
+     if (asesorado != "") {
+       gender = $("select#plan_guest_id").find(":selected").attr("data-gender");
+       age = $("select#plan_guest_id").find(":selected").attr("data-age");
+       height = $("select#plan_guest_id").find(":selected").attr("data-height");
+       weight = $("#plan_weight").val();
+       
+       if (gender == false ) {
+         $(".hombre-b").removeClass("hide");
+         $(".mujer-b").addClass("hide");
+       }else{
+         $(".mujer-b").removeClass("hide");
+         $(".hombre-b").addClass("hide");
+       }
+     }
+  });
+  
+  $(document).on("change", "#input_2, #input_1", function(e){
+     neck = $("#input_1").val();
+     waist = $("#input_2").val();     
+     bodyfat = (495 / ( (1.0324 - 0.19077 * Math.log10(parseFloat(waist) - parseFloat(neck))) + 0.15456 * Math.log10(parseFloat(height)) )) - 450
+     $("#plan_fat").val(parseFloat(bodyfat).toFixed(1));
+  });
+  
+  $(document).on("change", "#input_5, #input_4, #input_3", function(e){
+     neck = $("#input_3").val();
+     waist = $("#input_4").val();
+     hip = $("#input_5").val();   
+     bodyfat = (495 / ( (1.29579 - 0.35004 * Math.log10((parseFloat(waist) + parseFloat(hip)) - parseFloat(neck))) + 0.22100 * Math.log10(parseFloat(height)) )) - 450
+     $("#plan_fat").val(parseFloat(bodyfat).toFixed(1));
+  });
+.col.s12
+  = form_for @plan do |f|
+    - if @plan.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@plan.errors.count, "error")} prohibited this plan from being saved:"
+        %ul
+          - @plan.errors.full_messages.each do |message|
+            %li= message
+    = f.hidden_field :nutricionist_id, :value => current_user.id
+    .row
+      .col.s12
+        = f.label :guest, 'Correo del Asesorado'
+        = f.select :guest_id, @guests.collect{ |u| [u.email, u.id, {'data-gender' => u.gender, 'data-age' => u.age, 'data-height' => u.height}] }, {:include_blank => 'Asesorados'}, :required => true, selected: @default || nil
+    .row
+      .col.m6.s12
+        = f.label :goal, 'Objetivo'
+        %br/
+        -Plan.goals.keys.each do |goal|
+          %label{style: 'top: 0.5rem'}
+            .col.s12
+              = f.radio_button :goal, goal, class: "with-gap", checked: 'checked'
+              %span=goal
+      .col.m6.s12
+        = f.label :activity, 'Nivel de Actividad'
+        %br/
+        -Plan.activities.keys.each do |actividad|
+          %label{style: 'top: 0.5rem'}
+            .col.s6
+              = f.radio_button :activity, actividad, class: "with-gap", checked: 'checked'
+              %span=actividad
+    .row
+      .col.m6.s12
+        = f.label :weight, 'Peso'
+        = f.number_field :weight, step: "0.1", placeholder: "Peso total en KG", required: true
+      .col.m6.s12
+        %label.active Calcular porcentaje graso:
+        %br/
+        .center-align.small-margin-top
+          .col.s6
+            %a.btn.waves-effect.waves-light.btn-flat.disabled.medir-g.modal-trigger{:href => "#modalB"} BÁSICO
+          .col.s6
+            %a.btn.waves-effect.waves-light.btn-flat.disabled.medir-g.modal-trigger{:href => "#modalY"} YUHASZ
+    .row
+      .col.m6.s12
+        = f.label :fat, 'Porcentaje Graso'
+        = f.number_field :fat, step: "0.1", placeholder: "Porcentaje graso"
+      .col.m6.s12
+        = f.label :next, 'Fecha del proximo Plan'
+        = f.text_field :next, :value => Date.today >> 1, class: "datepicker"
+    .actions.center-align
+      = f.submit 'Crear', class: 'btn waves-effect waves-light white-text'
+      
+#modalB.modal.bottom-sheet{style: "max-height: 70%"}
+  .modal-content
+    %h4 Cálculo Básico
+    .row.hombre-b.hide
+      .col.s12.m6
+        .input-field
+          %input#input_1.validate{:type => "text", :required => true}/
+          %label.active{:for => "input_1"} Medida Cuello (CM)
+      .col.s12.m6      
+        .input-field
+          %input#input_2.validate{:type => "text", :required => true}/
+          %label.active{:for => "input_2"} Medida Cintura (CM)
+    .row.mujer-b.hide
+      .col.s12.m4
+        .input-field
+          %input#input_3.validate{:type => "text", :required => true}/
+          %label.active{:for => "input_3"} Medida Cuello (CM)
+      .col.s12.m4      
+        .input-field
+          %input#input_4.validate{:type => "text", :required => true}/
+          %label.active{:for => "input_4"} Medida Cintura (CM) 
+      .col.s12.m4      
+        .input-field
+          %input#input_5.validate{:type => "text", :required => true}/
+          %label.active{:for => "input_5"} Medida Cadera (CM) 
 
-  .field
-    = f.label :user
-    = f.text_field :user
-  .field
-    = f.label :guest
-    = f.text_field :guest
-    = f.label :guest, 'Correo del Asesorado'
-    = f.select :guest_id, @guests.collect{ |u| [u.email, u.id] }, selected: @default || nil    
-  .field
-    = f.label :weight
-    = f.text_field :weight
-  .field
-    = f.label :fat
-    = f.text_field :fat
-  .field
-    = f.label :activity
-    = f.number_field :activity
-  .field
-    = f.label :goal
-    = f.number_field :goal
-  .field
-    = f.label :muscle_mass
-    = f.text_field :muscle_mass
-  .field
-    = f.label :fat_mass
-    = f.text_field :fat_mass
-  .field
-    = f.label :skeletal_mass
-    = f.text_field :skeletal_mass
-  .field
-    = f.label :residual_mass
-    = f.text_field :residual_mass
-  .field
-    = f.label :lean_mass
-    = f.text_field :lean_mass
-  .field
-    = f.label :kcal
-    = f.number_field :kcal
-  .field
-    = f.label :proteins
-    = f.number_field :proteins
-  .field
-    = f.label :carbs
-    = f.number_field :carbs
-  .field
-    = f.label :carbs
-    = f.number_field :carbs
-  .field
-    = f.label :description
-    = f.text_area :description
-  .actions
-    = f.submit 'Save'
+
+#modalY.modal.bottom-sheet
+  .modal-content
+    %h4 Fórmula Yuhasz
+    %p A bunch of text

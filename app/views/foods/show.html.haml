@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @food.name
+%p
+  %b Status:
+  = @food.status
+%p
+  %b Group:
+  = @food.group
+%p
+  %b Carbohydrates:
+  = @food.carbohydrates
+%p
+  %b Proteins:
+  = @food.proteins
+%p
+  %b Fats:
+  = @food.fats
+%p
+  %b Default:
+  = @food.default
+%p
+  %b User:
+  = @food.user
+
+= link_to 'Edit', edit_food_path(@food)
+\|
+= link_to 'Back', foods_path

@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  resources :exercises
-  resources :plans
+  resources :foods, only: [:create, :index, :destroy, :new]
+  resources :exercises, only: [:show, :index]
+  resources :plans, only: [:create, :index, :destroy, :show, :new]
+  resources :guests, except: [:show]
+  
   devise_for :users, controllers: { registrations: 'registrations' }
   devise_scope :user do
     authenticated :user do
@@ -13,6 +16,5 @@ Rails.application.routes.draw do
     get "users"=> "registrations#index"
     post "users/list"=> "registrations#update_post"
   end
-  resources :guests, except: [:show]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
