@@ -9,7 +9,6 @@
           %table.center-align.datatable.striped.nowrap{:id => "display no-wrap"}
             %thead
               %tr
-                %th.hide Cedula
                 %th.hide Email
                 %th Nombre
                 %th.hide Phone
@@ -19,7 +18,6 @@
             %tbody
               - @guests.each do |guest|
                 %tr
-                  %td.hide= guest.cc
                   %td.hide= guest.email
                   %td
                     = link_to edit_guest_path(guest) do

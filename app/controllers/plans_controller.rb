@@ -1,4 +1,5 @@
 class PlansController < ApplicationController
+  before_action :current_user_active
   before_action :set_plan, only: [:show, :destroy]
   before_action :authenticate_user!
   before_action :authenticate_creator!, only: [:show, :destroy]
@@ -53,6 +54,10 @@ class PlansController < ApplicationController
   end
 
   private
+    def current_user_active
+      redirect_to plans_path, alert: 'No estas autorizado.' unless !current_user.premium.blank? && current_user.premium >= Time.now.to_date || current_user.admin
+    end  
+    
     def authenticate_creator!
       redirect_to plans_path, alert: 'No estas autorizado.' unless (@plan.user_id == current_user.id) || current_user.admin
     end
@@ -64,6 +69,6 @@ class PlansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plan_params
-      params.require(:plan).permit(:user_id, :guest_id, :weight, :fat, :activity, :goal, :muscle_mass, :fat_mass, :skeletal_mass, :residual_mass, :lean_mass, :kcal, :proteins, :carbs, :fats, :description)
+      params.require(:plan).permit(:user_id, :guest_id, :weight, :fat, :activity, :goal, :muscle_mass, :fat_mass, :skeletal_mass, :residual_mass, :lean_mass, :kcal, :proteins, :carbs, :fats, :description, :variation)
     end
 end

@@ -1,50 +1,152 @@
-%p#notice= notice
+:javascript
+  window.onload = function() {
+  
+    var marksData = {
+      labels: ["English", "English", "English", "English", "English"],
+      datasets: [{
+        label: "Student A",
+        backgroundColor: "rgba(200,0,0,0.2)",
+        data: [20]
+      }, {
+        label: "Student B",
+        backgroundColor: "rgba(0,0,200,0.2)",
+        data: [30]
+      }, {
+        label: "Student C",
+        backgroundColor: "rgba(0,0,200,0.2)",
+        data: [40]
+      }, {
+        label: "Student D",
+        backgroundColor: "rgba(0,0,200,0.2)",
+        data: [50]
+      }]
+    };
 
-%p
-  %b User:
-  = @plan.user
-%p
-  %b Guest:
-  = @plan.guest
-%p
-  %b Weight:
-  = @plan.weight
-%p
-  %b Fat:
-  = @plan.fat
-%p
-  %b Activity:
-  = @plan.activity
-%p
-  %b Goal:
-  = @plan.goal
-%p
-  %b Muscle mass:
-  = @plan.muscle_mass
-%p
-  %b Fat mass:
-  = @plan.fat_mass
-%p
-  %b Skeletal mass:
-  = @plan.skeletal_mass
-%p
-  %b Residual mass:
-  = @plan.residual_mass
-%p
-  %b Lean mass:
-  = @plan.lean_mass
-%p
-  %b Kcal:
-  = @plan.kcal
-%p
-  %b Proteins:
-  = @plan.proteins
-%p
-  %b Carbs:
-  = @plan.carbs
-%p
-  %b Carbs:
-  = @plan.carbs
-%p
-  %b Description:
-  = @plan.description
+    var options = {
+        scale: {
+            // Hides the scale
+            display: false
+        }
+    };  
+    var ctx = document.getElementById('myChart');
+    var myRadarChart = new Chart(ctx, {
+        type: 'radar',
+        data: marksData,
+        options: options
+    });
+  }
+
+.row
+  .col.s12.m12.l12
+    .card
+      .card-content
+        .center-align
+          %span.card-title 
+            Plan (
+            %small= @plan.created_at.strftime("%d/%m/%g")
+            - if !@plan.guest.next.blank? 
+              \-
+              %small= @plan.guest.next&.strftime("%d/%m/%g")
+            )
+        .row
+          .col.s12.m5
+            %h5 Info. Asesorado
+            %hr
+        .row
+          .col.s12.m5
+            %p
+              %b Nombre: 
+              %span= @plan.guest.name&.titleize
+            %p
+              %b Email: 
+              %span= @plan.guest.email&.downcase
+            %p            
+              %b Teléfono: 
+              %span= @plan.guest.phone
+            %p
+              %b Altura: 
+              %span
+                = @plan.guest.height
+                CM                
+            %p
+              %b Edad: 
+              %span= @plan.guest.age
+        .row
+          .col.s12.m5
+            %h5 Estadísticas Peso
+            %p
+              %b Peso: 
+              %span
+                = @plan.weight
+                Kg
+            %p
+              %b Grasa: 
+              %span
+                = @plan.fat
+                \%
+            %p
+              %b Masa Grasa: 
+              %span
+                = @plan.fat_mass
+                Kg
+            %p
+              %b Masa Magra: 
+              %span
+                = @plan.lean_mass
+                Kg
+              %ul.browser-default 
+                %li
+                  %b Masa Muscular: 
+                  %span
+                    = @plan.muscle_mass
+                    Kg
+                %li
+                  %b Masa Ósea: 
+                  %span
+                    = @plan.skeletal_mass
+                    Kg
+                %li
+                  %b Masa Residual: 
+                  %span
+                    = @plan.residual_mass
+                    Kg             
+            %br/
+          .col.s12.m5
+            %h5 Información Plan
+            %p
+              %b Nivel de Actividad: 
+              %span= @plan.activity 
+            %p
+              %b Objetivo: 
+              %span= @plan.goal
+            %p
+              %b Variación Calorica: 
+              %span
+                = @plan.variation
+                \%
+            %p
+              %b Calorías Diarias: 
+              %span
+                = @plan.kcal
+                KCALS
+              %ul.browser-default 
+                %li
+                  %b Proteinas: 
+                  %span
+                    = @plan.proteins
+                    \%
+                %li
+                  %b Carbohidratos: 
+                  %span
+                    = @plan.carbs
+                    \%
+                %li
+                  %b Grasas: 
+                  %span
+                    = @plan.fats
+                    \%                              
+          - !@plan.description.blank?
+          .col.s12
+            %br      
+            %br
+            %canvas#myChart{width: "100%", height:"100%"}

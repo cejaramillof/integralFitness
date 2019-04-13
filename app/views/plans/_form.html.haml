@@ -36,13 +36,25 @@
      $("#plan_fat").val(parseFloat(bodyfat).toFixed(1));
   });
   
-Definicion
-"document.getElementById('estimate_carbs').value=25;document.getElementById('estimate_fats').value=30;document.getElementById('estimate_proteins').value=45;document.getElementById('estimate_variation').value=-20"} Definición
-Mantenimiento
-"document.getElementById('estimate_carbs').value=40;document.getElementById('estimate_fats').value=35;document.getElementById('estimate_proteins').value=25;document.getElementById('estimate_variation').value=0"} Mantanimiento
-Volumen
-"document.getElementById('estimate_carbs').value=45;document.getElementById('estimate_fats').value=30;document.getElementById('estimate_proteins').value=25;document.getElementById('estimate_variation').value=20"} Volumen
-    .row  
+  $(document).on("click", "#plan_goal_definicion", function(e){
+     $("#plan_proteins").val(45);
+     $("#plan_carbs").val(25);
+     $("#plan_fats").val(30);
+     $("#plan_variation").val(-20);
+  });
+  $(document).on("click", "#plan_goal_mantenimiento", function(e){
+     $("#plan_proteins").val(25);
+     $("#plan_carbs").val(40);
+     $("#plan_fats").val(35);
+     $("#plan_variation").val(0);
+  });
+  $(document).on("click", "#plan_goal_volumen", function(e){
+     $("#plan_proteins").val(25);
+     $("#plan_carbs").val(45);
+     $("#plan_fats").val(30);
+     $("#plan_variation").val(20);
+  });   
+
 .col.s12
   = form_for @plan do |f|
     - if @plan.errors.any?
@@ -83,34 +95,33 @@ Volumen
         %label.active Calcular porcentaje graso:
         %br/
         .center-align.small-margin-top
-          .col.s6
+          .col.s12
             %a.btn.waves-effect.waves-light.btn-flat.disabled.medir-g.modal-trigger{:href => "#modalB"} BÁSICO
-          .col.s6
+          .col.s6.hide
             %a.btn.waves-effect.waves-light.btn-flat.disabled.medir-g.modal-trigger{:href => "#modalY"} YUHASZ
       .col.m3.s12
         = f.label :fat, 'Porcentaje Graso'
         = f.number_field :fat, step: "0.1", placeholder: "Porcentaje graso"
-    .row        
-      .col.m6.s12
-        = f.label :kcal, 'Calorías Diarias'
-        = f.number_field :kcal, placeholder: "Calorías Diarias", required: true
-      .col.m6.s12
-        = f.label :next, 'Fecha del proximo Plan'
-        = f.text_field :next, :value => Date.today >> 1, class: "datepicker"        
     .row
-      .col.m4.s12
+      .col.m3.s12
         = f.label :proteins, '% Proteinas'
         = f.number_field :proteins, placeholder: "% Proteinas", required: true
-      .col.m4.s12
+      .col.m3.s12
         = f.label :carbs, '% Carbohidratos'
         = f.number_field :carbs, placeholder: "% Carbohidratos", required: true
-      .col.m4.s12
+      .col.m3.s12
         = f.label :fats, '% Grasas'
         = f.number_field :fats, placeholder: "% Grasas", required: true
-    .row
-      .col.m12.s12
+      .col.m3.s12
+        = f.label :variation, '% Variacion total KCAL'
+        = f.number_field :variation, placeholder: "% Variacion total KCAL", required: true        
+    .row        
+      .col.m6.s12
         = f.label :description, 'Descripción'
-        = f.text_area :description, placeholder: "Descripción", class: 'materialize-textarea'        
+        = f.text_area :description, placeholder: "Descripción", class: 'materialize-textarea'       
+      .col.m6.s12
+        = f.label :next, 'Fecha del proximo Plan'
+        = f.text_field :next, :value => Date.today >> 1, class: "datepicker"
     .actions.center-align
       = f.submit 'Crear', class: 'btn waves-effect waves-light white-text'
       

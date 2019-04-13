@@ -10,28 +10,24 @@
               = message
   .row
     .input-field.col.s12.l6
-      %i.material-icons.prefix featured_video
-      =f.number_field :cc, class: 'validate', required: true, autofocus: true, autocomplete: "ID"
-      %label{:for => "guest_cc"} Cédula
-    .input-field.col.s12.l6
       %i.material-icons.prefix account_circle
       =f.text_field :name, class: 'validate', required: true, autocomplete: "name"
       %label{:for => "guest_name"} Nombre
-  .row
     .input-field.col.s12.l6
       %i.material-icons.prefix email
       =f.text_field :email, class: 'validate', required: true, autocomplete: "email"
       %label{:for => "guest_email"} Correo
+  .row      
     .input-field.col.s12.l6
       %i.material-icons.prefix local_phone
       =f.text_field :phone, class: 'validate', required: true, autocomplete: "phone"
       %label{:for => "guest_phone"} Teléfono
-  .row
     .input-field.col.s12.l6
       %i.material-icons.prefix vertical_align_top
       =f.number_field :height, class: 'validate', required: true, autocomplete: "height", min: 100, max: 250
       %label{:for => "guest_height"} Altura (CM)
-    .input-field.col.s12.l6
+  .row      
+    .input-field.col.s12.l6.offset-l3
       %i.material-icons.prefix wc
       %label{class: "active"} Genero
       -#Guest.genders.keys.each do |genero|
