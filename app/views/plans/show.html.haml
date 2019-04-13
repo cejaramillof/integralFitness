@@ -1,41 +1,68 @@
 :javascript
-  window.onload = function() {
-  
-    var marksData = {
-      labels: ["English", "English", "English", "English", "English"],
-      datasets: [{
-        label: "Student A",
-        backgroundColor: "rgba(200,0,0,0.2)",
-        data: [20]
-      }, {
-        label: "Student B",
-        backgroundColor: "rgba(0,0,200,0.2)",
-        data: [30]
-      }, {
-        label: "Student C",
-        backgroundColor: "rgba(0,0,200,0.2)",
-        data: [40]
-      }, {
-        label: "Student D",
-        backgroundColor: "rgba(0,0,200,0.2)",
-        data: [50]
-      }]
-    };
-
-    var options = {
-        scale: {
-            // Hides the scale
-            display: false
+  window.onload = function() { 
+    var divLine = document.getElementById("line-chart");
+    new Chart(divLine.getContext("2d"), {
+      type: 'line',
+      data: {
+        labels: JSON.parse(divLine.dataset.date),
+        datasets: [{ 
+            data: JSON.parse(divLine.dataset.weight),
+            label: "Peso Total",
+            borderColor: "#3cba9f",
+            /* backgroundColor: "#3cba9f" */
+            fill: true
+          }, { 
+            data: JSON.parse(divLine.dataset.lean),
+            label: "Masa Magra",
+            borderColor: "#8e5ea2",
+            fill: false
+          },{ 
+            data: JSON.parse(divLine.dataset.fat),
+            label: "Masa Grasa",
+            borderColor: "#3e95cd",
+            fill: false,
+            borderDash: [5, 5]
+  					            
+          }]
+      },
+      options: {
+        title: {
+          display: true,
+          responsive: true,
+          text: 'Historico Asesorado'
         }
-    };  
-    var ctx = document.getElementById('myChart');
-    var myRadarChart = new Chart(ctx, {
-        type: 'radar',
-        data: marksData,
-        options: options
+      }
+    });
+    
+    var divPolar = document.getElementById("polar-chart");
+    
+    var fatMass = document.getElementById("now_fat_mass").textContent;
+    var muscleMass = document.getElementById("now_muscle_mass").textContent;
+    var skeletalMass = document.getElementById("now_skeletal_mass").textContent;
+    var residualMass = document.getElementById("now_residual_mass").textContent;
+    var total_mass = [fatMass, muscleMass, skeletalMass, residualMass]; 
+    console.log(total_mass);
+    new Chart(divPolar.getContext("2d"), {
+        type: 'polarArea',
+        data: {
+          labels: ["Masa Grasa", "Masa Muscular", "Masa Ósea", "Masa Residual"],
+          datasets: [
+            {
+              label: "División Peso Total",
+              backgroundColor: ["#3e95cd", "#8e5ea2","#c45850","#e8c3b9"],
+              data: total_mass
+            }
+          ]
+        },
+        options: {
+          title: {
+            display: true,
+            responsive: true,
+            text: 'División Peso Total'
+          }
+        }
     });
   }
-
 .row
   .col.s12.m12.l12
     .card
@@ -52,8 +79,6 @@
           .col.s12.m5
             %h5 Info. Asesorado
             %hr
-        .row
-          .col.s12.m5
             %p
               %b Nombre: 
               %span= @plan.guest.name&.titleize
@@ -71,47 +96,6 @@
             %p
               %b Edad: 
               %span= @plan.guest.age
-        .row
-          .col.s12.m5
-            %h5 Estadísticas Peso
-            %p
-              %b Peso: 
-              %span
-                = @plan.weight
-                Kg
-            %p
-              %b Grasa: 
-              %span
-                = @plan.fat
-                \%
-            %p
-              %b Masa Grasa: 
-              %span
-                = @plan.fat_mass
-                Kg
-            %p
-              %b Masa Magra: 
-              %span
-                = @plan.lean_mass
-                Kg
-              %ul.browser-default 
-                %li
-                  %b Masa Muscular: 
-                  %span
-                    = @plan.muscle_mass
-                    Kg
-                %li
-                  %b Masa Ósea: 
-                  %span
-                    = @plan.skeletal_mass
-                    Kg
-                %li
-                  %b Masa Residual: 
-                  %span
-                    = @plan.residual_mass
-                    Kg             
-            %br/
-          .col.s12.m5
             %h5 Información Plan
             %p
               %b Nivel de Actividad: 
@@ -144,7 +128,58 @@
                   %b Grasas: 
                   %span
                     = @plan.fats
-                    \%                              
+                    \%              
+          .col.s12.m7
+            %canvas#line-chart{width: "100%", height:"100%", data: { weight: @weights, lean: @lean_mass, fat: @fat_mass, date: @date }}             
+        .row
+          %h5 Estadísticas Peso
+          .col.s12.m7
+            %canvas#polar-chart{width: "100%", height:"100%"}             
+          .col.s12.m5        
+            %p
+              %b Peso: 
+              %span
+                = @plan.weight
+              %span
+                Kg
+            %p
+              %b Grasa: 
+              %span
+                = @plan.fat
+              %span                
+                \%
+            %p
+              %b Masa Grasa: 
+              %span#now_fat_mass
+                = @plan.fat_mass
+              %span
+                Kg
+            %p
+              %b Masa Magra: 
+              %span
+                = @plan.lean_mass
+              %span
+                Kg
+              %ul.browser-default 
+                %li
+                  %b Masa Muscular: 
+                  %span#now_muscle_mass
+                    = @plan.muscle_mass
+                  %span
+                    Kg
+                %li
+                  %b Masa Ósea: 
+                  %span#now_skeletal_mass
+                    = @plan.skeletal_mass
+                  %span
+                    Kg
+                %li
+                  %b Masa Residual: 
+                  %span#now_residual_mass
+                    = @plan.residual_mass
+                  %span
+                    Kg             
+            %br/
           - !@plan.description.blank?
           .col.s12
             %br      

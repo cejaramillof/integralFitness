@@ -1,8 +1,8 @@
 class PlansController < ApplicationController
-  before_action :current_user_active
+  before_action :current_user_active, except: [:show]
   before_action :set_plan, only: [:show, :destroy]
-  before_action :authenticate_user!
-  before_action :authenticate_creator!, only: [:show, :destroy]
+  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_creator!, only: [:destroy]
 
   # GET /plans
   # GET /plans.json
@@ -17,6 +17,12 @@ class PlansController < ApplicationController
   # GET /plans/1
   # GET /plans/1.json
   def show
+    plans = @plan.guest.plans
+    @weights = plans.pluck(:weight)
+    @lean_mass = plans.pluck(:lean_mass)
+    @fat_mass = plans.pluck(:fat_mass)
+    #arr.map(&:email)
+    @date = plans.pluck(:created_at).map{ |date| date.strftime("%d %b %Y") }
   end
 
   # GET /plans/new
