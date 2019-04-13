@@ -15,7 +15,7 @@ class CreatePlans < ActiveRecord::Migration[5.2]
       t.integer :kcal
       t.integer :proteins
       t.integer :carbs
-      t.integer :carbs
+      t.integer :fats
       t.text :description
 
       t.timestamps

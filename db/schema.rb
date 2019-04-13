@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 2019_04_11_030718) do
     t.integer "kcal"
     t.integer "proteins"
     t.integer "carbs"
+    t.integer "fats"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

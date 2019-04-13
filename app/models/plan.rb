@@ -4,6 +4,13 @@ class Plan < ApplicationRecord
   enum activity: [:Alta, :Activa, :Baja, :Sedentaria]
   enum goal: [:Definicion, :Mantenimiento, :Volumen]
   before_save :calculate_mass
+  validate :sum_equals_100
+  
+  def sum_equals_100
+    if self.carbs + self.proteins + self.fats != 100
+      errors.add(:base, 'la suma de los 3 macronutrientes debe dar 100%')
+    end
+  end
   
   def calculate_mass
     if self.guest.gender == true

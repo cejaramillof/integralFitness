@@ -1,7 +1,7 @@
 class PlansController < ApplicationController
-  before_action :set_plan, only: [:show, :edit, :update, :destroy]
+  before_action :set_plan, only: [:show, :destroy]
   before_action :authenticate_user!
-  before_action :authenticate_creator!, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_creator!, only: [:show, :destroy]
 
   # GET /plans
   # GET /plans.json
@@ -64,6 +64,6 @@ class PlansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plan_params
-      params.require(:plan).permit(:user_id, :guest_id, :weight, :fat, :activity, :goal, :muscle_mass, :fat_mass, :skeletal_mass, :residual_mass, :lean_mass, :kcal, :proteins, :carbs, :carbs, :description)
+      params.require(:plan).permit(:user_id, :guest_id, :weight, :fat, :activity, :goal, :muscle_mass, :fat_mass, :skeletal_mass, :residual_mass, :lean_mass, :kcal, :proteins, :carbs, :fats, :description)
     end
 end

@@ -35,15 +35,25 @@
      bodyfat = (495 / ( (1.29579 - 0.35004 * Math.log10((parseFloat(waist) + parseFloat(hip)) - parseFloat(neck))) + 0.22100 * Math.log10(parseFloat(height)) )) - 450
      $("#plan_fat").val(parseFloat(bodyfat).toFixed(1));
   });
+  
+Definicion
+"document.getElementById('estimate_carbs').value=25;document.getElementById('estimate_fats').value=30;document.getElementById('estimate_proteins').value=45;document.getElementById('estimate_variation').value=-20"} Definición
+Mantenimiento
+"document.getElementById('estimate_carbs').value=40;document.getElementById('estimate_fats').value=35;document.getElementById('estimate_proteins').value=25;document.getElementById('estimate_variation').value=0"} Mantanimiento
+Volumen
+"document.getElementById('estimate_carbs').value=45;document.getElementById('estimate_fats').value=30;document.getElementById('estimate_proteins').value=25;document.getElementById('estimate_variation').value=20"} Volumen
+    .row  
 .col.s12
   = form_for @plan do |f|
     - if @plan.errors.any?
-      #error_explanation
-        %h2= "#{pluralize(@plan.errors.count, "error")} prohibited this plan from being saved:"
-        %ul
-          - @plan.errors.full_messages.each do |message|
-            %li= message
-    = f.hidden_field :nutricionist_id, :value => current_user.id
+      .row#error_explanation
+        .col.s12
+          %b= "#{pluralize(@plan.errors.count, "error")} prohibited this plan from being saved:"
+          %ul
+            - @plan.errors.full_messages.each do |message|
+              %li
+                %b -
+                = message
     .row
       .col.s12
         = f.label :guest, 'Correo del Asesorado'
@@ -66,7 +76,7 @@
               = f.radio_button :activity, actividad, class: "with-gap", checked: 'checked'
               %span=actividad
     .row
-      .col.m6.s12
+      .col.m3.s12
         = f.label :weight, 'Peso'
         = f.number_field :weight, step: "0.1", placeholder: "Peso total en KG", required: true
       .col.m6.s12
@@ -77,13 +87,30 @@
             %a.btn.waves-effect.waves-light.btn-flat.disabled.medir-g.modal-trigger{:href => "#modalB"} BÁSICO
           .col.s6
             %a.btn.waves-effect.waves-light.btn-flat.disabled.medir-g.modal-trigger{:href => "#modalY"} YUHASZ
-    .row
-      .col.m6.s12
+      .col.m3.s12
         = f.label :fat, 'Porcentaje Graso'
         = f.number_field :fat, step: "0.1", placeholder: "Porcentaje graso"
+    .row        
+      .col.m6.s12
+        = f.label :kcal, 'Calorías Diarias'
+        = f.number_field :kcal, placeholder: "Calorías Diarias", required: true
       .col.m6.s12
         = f.label :next, 'Fecha del proximo Plan'
-        = f.text_field :next, :value => Date.today >> 1, class: "datepicker"
+        = f.text_field :next, :value => Date.today >> 1, class: "datepicker"        
+    .row
+      .col.m4.s12
+        = f.label :proteins, '% Proteinas'
+        = f.number_field :proteins, placeholder: "% Proteinas", required: true
+      .col.m4.s12
+        = f.label :carbs, '% Carbohidratos'
+        = f.number_field :carbs, placeholder: "% Carbohidratos", required: true
+      .col.m4.s12
+        = f.label :fats, '% Grasas'
+        = f.number_field :fats, placeholder: "% Grasas", required: true
+    .row
+      .col.m12.s12
+        = f.label :description, 'Descripción'
+        = f.text_area :description, placeholder: "Descripción", class: 'materialize-textarea'        
     .actions.center-align
       = f.submit 'Crear', class: 'btn waves-effect waves-light white-text'
       
