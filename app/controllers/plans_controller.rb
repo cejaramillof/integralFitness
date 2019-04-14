@@ -17,12 +17,20 @@ class PlansController < ApplicationController
   # GET /plans/1
   # GET /plans/1.json
   def show
+    @creator = (@plan.user_id == current_user&.id) || current_user&.admin
     plans = @plan.guest.plans
     @weights = plans.pluck(:weight)
     @lean_mass = plans.pluck(:lean_mass)
     @fat_mass = plans.pluck(:fat_mass)
     #arr.map(&:email)
     @date = plans.pluck(:created_at).map{ |date| date.strftime("%d %b %Y") }
+    
+    #default_foods = Food.where(group: params[:group], default: true)
+    #user_foods = Food.where(group: params[:group], user_id: current_user.id)
+    #@foods = default_foods + user_foods
+    @exercises = Exercise.all
+    @exercise_day = ExerciseDay.new
+    @exercises_linked = @plan.exercise_day
   end
 
   # GET /plans/new
@@ -65,7 +73,7 @@ class PlansController < ApplicationController
     end  
     
     def authenticate_creator!
-      redirect_to plans_path, alert: 'No estas autorizado.' unless (@plan.user_id == current_user.id) || current_user.admin
+      redirect_to plans_path, alert: 'No estas autorizado.' unless (@plan.user_id == current_user&.id) || current_user&.admin
     end
     
     # Use callbacks to share common setup or constraints between actions.

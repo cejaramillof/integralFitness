@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :exercise_days, only: [:create, :destroy]
   resources :foods, only: [:create, :index, :destroy, :new]
   resources :exercises, only: [:show, :index]
   resources :plans, only: [:create, :index, :destroy, :show, :new]

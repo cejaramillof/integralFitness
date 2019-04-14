@@ -1,5 +1,5 @@
 :javascript
-  window.onload = function() { 
+  $(document).on('turbolinks:load', function() { 
     var divLine = document.getElementById("line-chart");
     new Chart(divLine.getContext("2d"), {
       type: 'line',
@@ -41,9 +41,8 @@
     var skeletalMass = document.getElementById("now_skeletal_mass").textContent;
     var residualMass = document.getElementById("now_residual_mass").textContent;
     var total_mass = [fatMass, muscleMass, skeletalMass, residualMass]; 
-    console.log(total_mass);
     new Chart(divPolar.getContext("2d"), {
-        type: 'polarArea',
+        type: 'pie',
         data: {
           labels: ["Masa Grasa", "Masa Muscular", "Masa Ósea", "Masa Residual"],
           datasets: [
@@ -62,126 +61,182 @@
           }
         }
     });
-  }
+  })
 .row
   .col.s12.m12.l12
     .card
       .card-content
-        .center-align
-          %span.card-title 
-            Plan (
-            %small= @plan.created_at.strftime("%d/%m/%g")
-            - if !@plan.guest.next.blank? 
-              \-
-              %small= @plan.guest.next&.strftime("%d/%m/%g")
-            )
         .row
-          .col.s12.m5
-            %h5 Info. Asesorado
-            %hr
-            %p
-              %b Nombre: 
-              %span= @plan.guest.name&.titleize
-            %p
-              %b Email: 
-              %span= @plan.guest.email&.downcase
-            %p            
-              %b Teléfono: 
-              %span= @plan.guest.phone
-            %p
-              %b Altura: 
-              %span
-                = @plan.guest.height
-                CM                
-            %p
-              %b Edad: 
-              %span= @plan.guest.age
-            %h5 Información Plan
-            %p
-              %b Nivel de Actividad: 
-              %span= @plan.activity 
-            %p
-              %b Objetivo: 
-              %span= @plan.goal
-            %p
-              %b Variación Calorica: 
-              %span
-                = @plan.variation
-                \%
-            %p
-              %b Calorías Diarias: 
-              %span
-                = @plan.kcal
-                KCALS
-              %ul.browser-default 
-                %li
-                  %b Proteinas: 
-                  %span
-                    = @plan.proteins
-                    \%
-                %li
-                  %b Carbohidratos: 
-                  %span
-                    = @plan.carbs
-                    \%
-                %li
-                  %b Grasas: 
-                  %span
-                    = @plan.fats
-                    \%              
-          .col.s12.m7
-            %canvas#line-chart{width: "100%", height:"100%", data: { weight: @weights, lean: @lean_mass, fat: @fat_mass, date: @date }}             
-        .row
-          %h5 Estadísticas Peso
-          .col.s12.m7
-            %canvas#polar-chart{width: "100%", height:"100%"}             
-          .col.s12.m5        
-            %p
-              %b Peso: 
-              %span
-                = @plan.weight
-              %span
-                Kg
-            %p
-              %b Grasa: 
-              %span
-                = @plan.fat
-              %span                
-                \%
-            %p
-              %b Masa Grasa: 
-              %span#now_fat_mass
-                = @plan.fat_mass
-              %span
-                Kg
-            %p
-              %b Masa Magra: 
-              %span
-                = @plan.lean_mass
-              %span
-                Kg
-              %ul.browser-default 
-                %li
-                  %b Masa Muscular: 
-                  %span#now_muscle_mass
-                    = @plan.muscle_mass
-                  %span
-                    Kg
-                %li
-                  %b Masa Ósea: 
-                  %span#now_skeletal_mass
-                    = @plan.skeletal_mass
-                  %span
-                    Kg
-                %li
-                  %b Masa Residual: 
-                  %span#now_residual_mass
-                    = @plan.residual_mass
-                  %span
-                    Kg             
-            %br/
-          - !@plan.description.blank?
           .col.s12
-            %br      
-            %br
-            %canvas#myChart{width: "100%", height:"100%"}
+            %ul.tabs
+              %li.tab.col.s4
+                %a.active{:href => "#plan_view"} Plan
+              %li.tab.col.s4
+                %a{:href => "#food_view"} Nutrición
+              %li.tab.col.s4
+                %a{:href => "#exercise_view"} Entreno
+        #plan_view
+          .center-align
+            %span.card-title 
+              Plan (
+              %small= @plan.created_at.strftime("%d/%m/%g")
+              - if !@plan.guest.next.blank? 
+                \-
+                %small= @plan.guest.next&.strftime("%d/%m/%g")
+              )
+          .row.valign-wrapper
+            .col.s12.m5
+              %h5 Info. Asesorado
+              .divider
+              %br/
+              %p
+                %b Nombre: 
+                %span= @plan.guest.name&.titleize
+              %p
+                %b Email: 
+                %span= @plan.guest.email&.downcase
+              %p            
+                %b Teléfono: 
+                %span= @plan.guest.phone
+              %p
+                %b Altura: 
+                %span
+                  = @plan.guest.height
+                  CM                
+              %p
+                %b Edad: 
+                %span= @plan.guest.age
+              %h5 Información Plan
+              %p
+                %b Objetivo: 
+                %span= @plan.goal              
+              %p
+                %b Nivel de Actividad: 
+                %span= @plan.activity 
+              %p
+                %b Variación Calorica: 
+                %span
+                  = @plan.variation
+                  \%
+              %p
+                %b Calorías Diarias: 
+                %span
+                  = @plan.kcal
+                  KCALS
+                %ul.browser-default 
+                  %li
+                    %b Proteinas: 
+                    %span
+                      = @plan.proteins
+                      \%
+                  %li
+                    %b Carbohidratos: 
+                    %span
+                      = @plan.carbs
+                      \%
+                  %li
+                    %b Grasas: 
+                    %span
+                      = @plan.fats
+                      \%              
+            .col.s12.m7
+              %canvas#line-chart{width: "100%", height:"100%", data: { weight: @weights, lean: @lean_mass, fat: @fat_mass, date: @date }}             
+          .divider
+          .row.valign-wrapper
+            %br/
+            .col.s12.m7
+              %canvas#polar-chart{width: "100%", height:"100%"}             
+            .col.s12.m5
+              %h5 Estadísticas Peso
+              .divider
+              %p
+                %b Peso: 
+                %span
+                  = @plan.weight
+                %span
+                  Kg
+              %p
+                %b Grasa: 
+                %span
+                  = @plan.fat
+                %span                
+                  \%
+              %p
+                %b Masa Grasa: 
+                %span#now_fat_mass
+                  = @plan.fat_mass
+                %span
+                  Kg
+              %p
+                %b Masa Magra: 
+                %span
+                  = @plan.lean_mass
+                %span
+                  Kg
+                %ul.browser-default 
+                  %li
+                    %b Masa Muscular: 
+                    %span#now_muscle_mass
+                      = @plan.muscle_mass
+                    %span
+                      Kg
+                  %li
+                    %b Masa Ósea: 
+                    %span#now_skeletal_mass
+                      = @plan.skeletal_mass
+                    %span
+                      Kg
+                  %li
+                    %b Masa Residual: 
+                    %span#now_residual_mass
+                      = @plan.residual_mass
+                    %span
+                      Kg             
+              - if !@plan.description.blank?
+                %b Descripción:
+                %p=@plan.description
+        #food_view
+          xd
+        #exercise_view
+          -if @creator && current_user.active
+            %h6.card-title Agregar Ejercicio
+            = form_for @exercise_day do |f|
+              .row
+                = f.hidden_field :plan_id, value: @plan.id
+                .col.s12.m6
+                  = f.label :day, 'Dia'
+                  = f.select :day, options_for_select(1..15), { prompt: "Día de la Semana" }, :required => true
+                .col.s12.m6
+                  = f.label :exercise, 'Ejercicio'
+                  = f.select :exercise_id, @exercises.collect{ |u| [u.descrizione.capitalize + " (" + u.gruppo1 + ")", u.id] }, {:include_blank => 'Ejercicio'}, :required => true, selected: nil
+                .col.m12.s12
+                  = f.label :description, 'Descripción'
+                  = f.text_area :description, placeholder: "Indicar las series, tiempo de descanso y explicación más detallada.", class: 'materialize-textarea'
+              .actions.center-align
+                = f.submit 'Crear', class: 'btn waves-effect waves-light white-text'          
+          -if @exercises_linked
+            %br/
+            .divider
+            - (1..15).each do |i|
+              -if @exercises_linked.where(:day => i).count != 0
+                .row
+                  %h5= "Día de Ejercicio #{i}"
+                  %table
+                    %thead
+                      %tr
+                        %th{width: "30%"} Ejercicio
+                        %th{width: "60%"} Descripción
+                        -if @creator && current_user.active
+                          %th{width: "10%"}
+                    %tbody 
+                    - @exercises_linked.where(:day => i).each do |exercise_day|
+                      %tr
+                        %td
+                          = link_to exercise_day.exercise do
+                            %p= exercise_day.exercise.descrizione.capitalize
+                        %td= exercise_day.description.capitalize
+                        -if @creator && current_user.active
+                          %td
+                            = link_to exercise_day, method: :delete, data: { confirm: '¿Estas seguro que deseas eliminar este ejercicio?' } do
+                              %i.material-icons.black-text delete_forever
+              

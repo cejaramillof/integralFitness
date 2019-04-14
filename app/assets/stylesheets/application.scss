@@ -288,11 +288,15 @@ a:active {
 }
 
 .select2-container--default {
+  width: 100%!important;
+}
+
+#new_guest > div:nth-child(6) > div > div > span {
   width: 32%!important;
 }
 
-#new_food > div:nth-child(5) > div:nth-child(2) > span {
-  width: 100%!important;
+.edit_user > div:nth-child(7) > div > div > span {
+  width: 32%!important;
 }
 
 .float-right-top {
@@ -301,6 +305,8 @@ a:active {
   top: 1em;
 }
 
-#new_plan > div:nth-child(3) > div > span {
-  width: 100%!important;
+@media screen and (max-width:768px){
+  .valign-wrapper {
+    display: block;
+  }
 }

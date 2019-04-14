@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  exercise: one
+  plan: one
+  day: 1
+  order: 1
+  description: MyText
+
+two:
+  exercise: two
+  plan: two
+  day: 1
+  order: 1
+  description: MyText

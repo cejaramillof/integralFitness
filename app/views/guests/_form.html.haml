@@ -1,4 +1,4 @@
-= form_for @guest do |f|
+= form_for @guest, :html => {:class => 'edit_user'} do |f|
   - if @guest.errors.any?
     .row#error_explanation
       .col.s12

@@ -59,6 +59,7 @@ $(document).on("turbolinks:load", function() {
     $('.tooltipped').tooltip();
     $('.sidenav').sidenav();
     M.updateTextFields();
+    $('.tabs').tabs();
     $('.datepicker').datepicker({
         firstDay: true,
         format: 'yyyy-mm-dd',

@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_13_041924) do
+ActiveRecord::Schema.define(version: 2019_04_14_015039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "exercise_days", force: :cascade do |t|
+    t.bigint "exercise_id"
+    t.bigint "plan_id"
+    t.integer "day"
+    t.integer "order"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["exercise_id"], name: "index_exercise_days_on_exercise_id"
+    t.index ["plan_id"], name: "index_exercise_days_on_plan_id"
+  end
 
   create_table "exercises", force: :cascade do |t|
     t.integer "codice"
@@ -105,6 +117,8 @@ ActiveRecord::Schema.define(version: 2019_04_13_041924) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "exercise_days", "exercises"
+  add_foreign_key "exercise_days", "plans"
   add_foreign_key "foods", "users"
   add_foreign_key "guests", "users"
   add_foreign_key "plans", "guests"
