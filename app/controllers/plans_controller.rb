@@ -32,6 +32,7 @@ class PlansController < ApplicationController
     user_foods ? @foods = default_foods + user_foods : @foods = default_foods
     @food_day = FoodDay.new
     @exercises_linked = @plan.exercise_day
+    @foods_linked = @plan.food_day
   end
 
   # GET /plans/new

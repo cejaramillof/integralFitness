@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
   def set_plans
     if current_user
       @all_plans = current_user.guests.where(next: Time.now)
+    else
+      @all_plans = []
     end
   end
   
