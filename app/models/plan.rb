@@ -7,7 +7,8 @@ class Plan < ApplicationRecord
   enum activity: [:Alta, :Activa, :Baja, :Sedentaria]
   enum goal: [:Definicion, :Mantenimiento, :Volumen]
   validate :sum_equals_100
-  has_many :exercise_day
+  has_many :exercise_day, dependent: :destroy
+  has_many :food_day, dependent: :destroy
     
   def activity_n
     if self.guest.gender == false

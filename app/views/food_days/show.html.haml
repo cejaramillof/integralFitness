@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Weight:
+  = @food_day.weight
+%p
+  %b Food:
+  = @food_day.food
+%p
+  %b Plan:
+  = @food_day.plan
+%p
+  %b Description:
+  = @food_day.description
+%p
+  %b Day:
+  = @food_day.day
+%p
+  %b Moment:
+  = @food_day.moment
+
+= link_to 'Edit', edit_food_day_path(@food_day)
+\|
+= link_to 'Back', food_days_path

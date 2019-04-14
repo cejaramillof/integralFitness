@@ -196,7 +196,31 @@
                 %b Descripción:
                 %p=@plan.description
         #food_view
-          xd
+          -if @creator && current_user.active
+            %h6.card-title Agregar Alimento
+            = form_for @food_day do |f|
+              .row
+                = f.hidden_field :plan_id, value: @plan.id
+                .col.s12.m6
+                  = f.label :day, 'Día de la Semana'
+                  = f.select :day, options_for_select(1..7), :required => true
+                .col.s12.m6
+                  = f.label :day, 'Momento del Día'
+                  = f.select :moment, FoodDay.moments.keys.to_a, :required => true
+              .row.valign-wrapper
+                .col.s12.m6
+                  = f.label :food, 'Alimento'
+                  = f.select :food_id, @foods.collect{ |u| [u.name.capitalize + " (" + u.status.downcase + ")", u.id] }, {:include_blank => 'Alimento'}, :required => true, selected: nil
+                .col.s12.m6
+                  = f.label :weight, 'Gramos Alimento'
+                  = f.number_field :weight, step: "1", placeholder: "Peso requerido en gr", required: true 
+              .row
+                .col.m12.s12
+                  = f.label :description, 'Descripción'
+                  = f.text_area :description, placeholder: "Indicaciones para su preparación", class: 'materialize-textarea'
+              .actions.center-align
+                = f.submit 'Crear', class: 'btn waves-effect waves-light white-text' 
+            %p  pdf, listar alimentos asignados, contador meses
         #exercise_view
           -if @creator && current_user.active
             %h6.card-title Agregar Ejercicio
@@ -213,7 +237,7 @@
                   = f.label :description, 'Descripción'
                   = f.text_area :description, placeholder: "Indicar las series, tiempo de descanso y explicación más detallada.", class: 'materialize-textarea'
               .actions.center-align
-                = f.submit 'Crear', class: 'btn waves-effect waves-light white-text'          
+                = f.submit 'Crear', class: 'btn waves-effect waves-light white-text' 
           -if @exercises_linked
             %br/
             .divider

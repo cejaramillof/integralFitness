@@ -1,0 +1,28 @@
+= form_for @food_day do |f|
+  - if @food_day.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@food_day.errors.count, "error")} prohibited this food_day from being saved:"
+      %ul
+        - @food_day.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :weight
+    = f.text_field :weight
+  .field
+    = f.label :food
+    = f.text_field :food
+  .field
+    = f.label :plan
+    = f.text_field :plan
+  .field
+    = f.label :description
+    = f.text_area :description
+  .field
+    = f.label :day
+    = f.number_field :day
+  .field
+    = f.label :moment
+    = f.number_field :moment
+  .actions
+    = f.submit 'Save'

@@ -48,8 +48,10 @@
                             - when "Volumen"
                               %i.material-icons.tooltipped{'data-tooltip' => "Volumen"} trending_up               
                         .col.s10.right-align
-                          %i.material-icons.tooltipped{'data-tooltip' => "Nutricional"} restaurant
-                          %i.material-icons.tooltipped{'data-tooltip' => "Entrenamiento"} fitness_center
+                          -if plan.food_day.count > 0
+                            %i.material-icons.tooltipped{'data-tooltip' => "Nutricional"} restaurant
+                          -if plan.exercise_day.count > 0  
+                            %i.material-icons.tooltipped{'data-tooltip' => "Entrenamiento"} fitness_center
                           //%i.material-icons local_hospital
           .row.center-align.no-margin-bottom
             = will_paginate @plans, inner_window: 0, outer_window: 0

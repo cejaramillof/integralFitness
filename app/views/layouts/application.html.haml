@@ -15,14 +15,14 @@
     #modal1.modal
       .modal-content
         %h5 Planes para renovar hoy:
-        // -@all_plans.each do |plan|
-        //   %b=plan.user.name.to_s
-        //   =link_to "[Crear]", new_plan_path(user_id: plan.user.id)
-        //   %small
-        //     %ul.browser-default
-        //       %li=plan.user.email.to_s
-        //       -if plan.user.contact
-        //         %li=plan.user.contact.to_s
+        -@all_plans.each do |guest|
+          %b=guest.name.to_s.titleize
+          =link_to "[Crear]", new_plan_path
+          %small
+            %ul.browser-default
+              %li=guest.email.to_s
+              -if guest.phone
+                %li=guest.phone.to_s
       .modal-footer
         %a.modal-close.waves-effect.waves-green.btn-flat Ok
     .navbar-fixed
@@ -101,8 +101,8 @@
             %b
               CEJARAMILLOF
       %br/
-// -if @all_plans.count > 0
-//   .fixed-action-btn
-//     %a.btn-floating.modal-trigger.waves-effect.waves-light.btn-large.teal.pulse{"data-target" => "modal1"}
-//       %span.number-noti= @all_plans.count
-//       %i.material-icons notifications
+-if @all_plans.count > 0
+  .fixed-action-btn
+    %a.btn-floating.modal-trigger.waves-effect.waves-light.btn-large.teal.pulse{"data-target" => "modal1"}
+      %span.number-noti= @all_plans.count
+      %i.material-icons notifications

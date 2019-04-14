@@ -25,11 +25,12 @@ class PlansController < ApplicationController
     #arr.map(&:email)
     @date = plans.pluck(:created_at).map{ |date| date.strftime("%d %b %Y") }
     
-    #default_foods = Food.where(group: params[:group], default: true)
-    #user_foods = Food.where(group: params[:group], user_id: current_user.id)
-    #@foods = default_foods + user_foods
     @exercises = Exercise.all
     @exercise_day = ExerciseDay.new
+    default_foods = Food.where(default: true)
+    user_foods = Food.where(user_id: current_user.id) if current_user
+    user_foods ? @foods = default_foods + user_foods : @foods = default_foods
+    @food_day = FoodDay.new
     @exercises_linked = @plan.exercise_day
   end
 
@@ -37,7 +38,6 @@ class PlansController < ApplicationController
   def new
     @plan = Plan.new
     @guests = current_user.guests.all
-    @default = params[:user_id]
   end
 
   # POST /plans

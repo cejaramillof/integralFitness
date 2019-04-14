@@ -1,5 +1,6 @@
 class ExerciseDaysController < ApplicationController
   before_action :set_exercise_day, only: [:destroy]
+  before_action :authenticate_user!, only: [:create, :destroy]
 
   # POST /exercise_days
   # POST /exercise_days.json

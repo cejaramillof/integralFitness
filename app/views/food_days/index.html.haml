@@ -1,0 +1,31 @@
+%h1 Listing food_days
+
+%table
+  %thead
+    %tr
+      %th Weight
+      %th Food
+      %th Plan
+      %th Description
+      %th Day
+      %th Moment
+      %th
+      %th
+      %th
+
+  %tbody
+    - @food_days.each do |food_day|
+      %tr
+        %td= food_day.weight
+        %td= food_day.food
+        %td= food_day.plan
+        %td= food_day.description
+        %td= food_day.day
+        %td= food_day.moment
+        %td= link_to 'Show', food_day
+        %td= link_to 'Edit', edit_food_day_path(food_day)
+        %td= link_to 'Destroy', food_day, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Food day', new_food_day_path

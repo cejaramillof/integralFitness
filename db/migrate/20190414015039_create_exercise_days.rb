@@ -4,7 +4,6 @@ class CreateExerciseDays < ActiveRecord::Migration[5.2]
       t.references :exercise, foreign_key: true
       t.references :plan, foreign_key: true
       t.integer :day
-      t.integer :order
       t.text :description
 
       t.timestamps

@@ -1,8 +1,15 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_plans
   MUSCLE_BASE_URL = "https://jhnutricion.com/"
   # "https://evolutionfitimg.teamsystem.com/"
   $base_url = MUSCLE_BASE_URL
+  
+  def set_plans
+    if current_user
+      @all_plans = current_user.guests.where(next: Time.now)
+    end
+  end
   
   #check if user is admin
   def authenticate_admin!

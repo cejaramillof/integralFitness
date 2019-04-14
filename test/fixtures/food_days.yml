@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  weight: 1.5
+  food: one
+  plan: one
+  description: MyText
+  day: 1
+  moment: 1
+
+two:
+  weight: 1.5
+  food: two
+  plan: two
+  description: MyText
+  day: 1
+  moment: 1
