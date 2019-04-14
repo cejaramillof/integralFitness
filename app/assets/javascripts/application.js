@@ -29,24 +29,6 @@ $(document).on("turbolinks:before-visit turbolinks:before-cache", function() {
 });
 
 $(document).on("turbolinks:load", function() {  
-    $('.datatable').DataTable({
-        pagingType: 'simple',
-        language: {
-            searchPlaceholder: "Escribe aquí",
-            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
-        },
-        responsive: {
-            details: {
-                type: 'column',
-                target: 'tr'
-            }
-        },
-        columnDefs: [ {
-            className: 'control',
-            orderable: false,
-            targets:   0
-        } ]    
-      });
     M.Modal._count = 0;
     $('select').select2({
         language: {

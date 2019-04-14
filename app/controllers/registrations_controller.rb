@@ -18,7 +18,7 @@ class RegistrationsController < Devise::RegistrationsController
     end
     respond_to do |format|
       if @user.update_attributes(premium: params[:user][:premium])
-        format.html { redirect_to users_admin_path, :notice => 'Usuario actualizado con éxito.' }
+        format.html { redirect_to users_path, :notice => 'Usuario actualizado con éxito.' }
         format.json { head :ok }
       end
     end

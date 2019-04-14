@@ -1,3 +1,13 @@
+:javascript
+  $(document).ready( function () {
+      $('.datatable').DataTable({
+        pagingType: 'simple',
+        language: {
+            searchPlaceholder: "Por Nombre, Email o Teléfono",
+            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+        }   
+      });
+  } );  
 .row
   .col.s12.m12.l12
     .card

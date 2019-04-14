@@ -1,3 +1,14 @@
+:javascript
+  $(document).ready( function () {
+      $('.datatable').DataTable({
+        pagingType: 'simple',
+        language: {
+            searchPlaceholder: "Busca aquí",
+            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+        }   
+      });
+  } );
+  
 .row
   .col.s12
     .card
@@ -11,22 +22,20 @@
           %table.datatable.striped.responsive.no-wrap
             %thead
               %tr
-                %th
                 %th Nombre
-                %th Estado
                 %th Carbs
                 %th Prote
                 %th Grasas
             %tbody
               - @foods.each do |food|
                 %tr
-                  %th
                   %td
                     -if !food.user == current_user || current_user&.admin?
                       = link_to food, method: :delete, data: { confirm: '¿Estas seguro?' } do
-                        %i.material-icons.black-text delete_forever  
-                    = food.name
-                  %td= food.status
+                        %i.material-icons.black-text delete_forever
+                    %span
+                      = food.name.capitalize
+                      %small= "( #{food.status.downcase} )"
                   %td= food.carbohydrates
                   %td= food.proteins
                   %td= food.fats

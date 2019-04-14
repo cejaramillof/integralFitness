@@ -1,4 +1,24 @@
+:javascript
+  $(document).ready( function () {
+      $('.datatable').DataTable({
+        pagingType: 'simple',
+        language: {
+            searchPlaceholder: "Por Nombre, Email o Teléfono",
+            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+        }   
+      });
+  } );
+  jQuery.fn.submitOnCheck = function() {
+    this.find('input[type=submit]').remove();
+    this.find('input[type=date]').focusout(function() {
+      return $(this).parent('form').submit();
+    });
+    return this;
+  };
 
+  jQuery(function() {
+    return $('.admin-edit-user').submitOnCheck();
+  });  
 .row
   .col.s12
     .card
