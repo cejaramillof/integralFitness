@@ -1,28 +1,28 @@
 :javascript
-  $(document).on('turbolinks:load', function() { 
+  $(document).on('turbolinks:load', function() {
     var divLine = document.getElementById("line-chart");
     new Chart(divLine.getContext("2d"), {
       type: 'line',
       data: {
         labels: JSON.parse(divLine.dataset.date),
-        datasets: [{ 
+        datasets: [{
             data: JSON.parse(divLine.dataset.weight),
             label: "Peso Total",
             borderColor: "#3cba9f",
             /* backgroundColor: "#3cba9f" */
             fill: true
-          }, { 
+          }, {
             data: JSON.parse(divLine.dataset.lean),
             label: "Masa Magra",
             borderColor: "#8e5ea2",
             fill: false
-          },{ 
+          },{
             data: JSON.parse(divLine.dataset.fat),
             label: "Masa Grasa",
             borderColor: "#3e95cd",
             fill: false,
             borderDash: [5, 5]
-  					            
+
           }]
       },
       options: {
@@ -33,14 +33,14 @@
         }
       }
     });
-    
+
     var divPolar = document.getElementById("polar-chart");
-    
+
     var fatMass = document.getElementById("now_fat_mass").textContent;
     var muscleMass = document.getElementById("now_muscle_mass").textContent;
     var skeletalMass = document.getElementById("now_skeletal_mass").textContent;
     var residualMass = document.getElementById("now_residual_mass").textContent;
-    var total_mass = [fatMass, muscleMass, skeletalMass, residualMass]; 
+    var total_mass = [fatMass, muscleMass, skeletalMass, residualMass];
     new Chart(divPolar.getContext("2d"), {
         type: 'pie',
         data: {
@@ -62,6 +62,25 @@
         }
     });
   })
+
+  $(document).on("change", "select#food_day_food_id, #food_day_weight", function(e){
+     food = $("select#food_day_food_id").val();
+     weight = $("#food_day_weight").val();
+
+     if (food != "" && weight != "") {
+       proteins = $("select#food_day_food_id").find(":selected").attr("data-proteins");
+       carbs = $("select#food_day_food_id").find(":selected").attr("data-carbs");
+       fats = $("select#food_day_food_id").find(":selected").attr("data-fats");
+
+       $('#protes_calculated').html((weight  * proteins) / 100);
+       $('#carbs_calculated').html((weight  * carbs) / 100);
+       $('#fats_calculated').html((weight  * fats) / 100);
+       
+       $("#macros_calculated").removeClass("hide");
+     } else {
+      $("#macros_calculated").addClass("hide");
+     }
+  });
 .row
   .col.s12.m12.l12
     .card
@@ -77,123 +96,123 @@
                 %a{:href => "#exercise_view"} Entreno
         #plan_view
           .center-align
-            %span.card-title 
+            %span.card-title
               Plan (
               %small= @plan.created_at.strftime("%d/%m/%g")
-              - if !@plan.guest.next.blank? 
+              - if !@plan.guest.next.blank?
                 \-
                 %small= @plan.guest.next&.strftime("%d/%m/%g")
               )
           .row.valign-wrapper
             .col.s12.m7
-              %canvas#line-chart{width: "100%", height:"100%", data: { weight: @weights, lean: @lean_mass, fat: @fat_mass, date: @date }}                    
+              %canvas#line-chart{width: "100%", height:"100%", data: { weight: @weights, lean: @lean_mass, fat: @fat_mass, date: @date }}
             .col.s12.m5
               %h5 Info. Asesorado
               .divider
               %br/
               %p
-                %b Nombre: 
+                %b Nombre:
                 %span= @plan.guest.name&.titleize
               %p
-                %b Email: 
+                %b Email:
                 %span= @plan.guest.email&.downcase
-              %p            
-                %b Teléfono: 
+              %p
+                %b Teléfono:
                 %span= @plan.guest.phone
               %p
-                %b Altura: 
+                %b Altura:
                 %span
                   = @plan.guest.height
-                  CM                
+                  CM
               %p
-                %b Edad: 
+                %b Edad:
                 %span= @plan.guest.age
               %h5 Información Plan
               %p
-                %b Objetivo: 
-                %span= @plan.goal              
+                %b Objetivo:
+                %span= @plan.goal
               %p
-                %b Nivel de Actividad: 
-                %span= @plan.activity 
+                %b Nivel de Actividad:
+                %span= @plan.activity
               %p
-                %b Variación Calorica: 
+                %b Variación Calorica:
                 %span
                   = @plan.variation
                   \%
               %p
-                %b Calorías Diarias: 
+                %b Calorías Diarias:
                 %span
                   = @plan.kcal
                   KCALS
-                %ul.browser-default 
+                %ul.browser-default
                   %li
-                    %b Proteinas: 
+                    %b Proteinas:
                     %span
                       = @plan.proteins
                       \%
                   %li
-                    %b Carbohidratos: 
+                    %b Carbohidratos:
                     %span
                       = @plan.carbs
                       \%
                   %li
-                    %b Grasas: 
+                    %b Grasas:
                     %span
                       = @plan.fats
-                      \%              
+                      \%
           .row.valign-wrapper
             %br/
             .col.s12.m5
               %h5 Estadísticas Peso
               .divider
               %p
-                %b Peso: 
+                %b Peso:
                 %span
                   = @plan.weight
                 %span
                   Kg
               %p
-                %b Grasa: 
+                %b Grasa:
                 %span
                   = @plan.fat
-                %span                
+                %span
                   \%
               %p
-                %b Masa Grasa: 
+                %b Masa Grasa:
                 %span#now_fat_mass
                   = @plan.fat_mass
                 %span
                   Kg
               %p
-                %b Masa Magra: 
+                %b Masa Magra:
                 %span
                   = @plan.lean_mass
                 %span
                   Kg
-                %ul.browser-default 
+                %ul.browser-default
                   %li
-                    %b Masa Muscular: 
+                    %b Masa Muscular:
                     %span#now_muscle_mass
                       = @plan.muscle_mass
                     %span
                       Kg
                   %li
-                    %b Masa Ósea: 
+                    %b Masa Ósea:
                     %span#now_skeletal_mass
                       = @plan.skeletal_mass
                     %span
                       Kg
                   %li
-                    %b Masa Residual: 
+                    %b Masa Residual:
                     %span#now_residual_mass
                       = @plan.residual_mass
                     %span
-                      Kg             
+                      Kg
               - if !@plan.description.blank?
                 %b Descripción:
                 %p=@plan.description
             .col.s12.m7
-              %canvas#polar-chart{width: "100%", height:"100%"}                    
+              %canvas#polar-chart{width: "100%", height:"100%"}
         #food_view
           -if @creator && current_user.active
             %h6.card-title Agregar Alimento
@@ -209,16 +228,34 @@
               .row.valign-wrapper
                 .col.s12.m6
                   = f.label :food, 'Alimento'
-                  = f.select :food_id, @foods.collect{ |u| [u.name.capitalize + (u.status.blank? ? "" : "( #{u.status.downcase} )"), u.id] }, {:include_blank => 'Alimento'}, :required => true, selected: nil
+                  = f.select :food_id, @foods.collect{ |u| [u.name.capitalize + (u.status.blank? ? "" : "( #{u.status.downcase} )"), u.id, {'data-proteins' => u.proteins, 'data-carbs' => u.carbohydrates, 'data-fats' => u.fats}] }, {:include_blank => 'Alimento'}, :required => true, selected: nil
                 .col.s12.m6
                   = f.label :weight, 'Gramos Alimento'
-                  = f.number_field :weight, step: "1", placeholder: "Peso requerido en gr", required: true 
+                  = f.number_field :weight, step: "1", placeholder: "Peso requerido en gr", value: "100", required: true
+              .row
+                .col.s12
+                  %table#macros_calculated.hide
+                    %thead
+                      %th Proteinas
+                      %th Carbos
+                      %th Grasas
+                    %tbody
+                      %tr
+                        %td
+                          %span#protes_calculated 9
+                          %span gr
+                        %td
+                          %span#carbs_calculated 9
+                          %span gr
+                        %td
+                          %span#fats_calculated 9
+                          %span gr
               .row
                 .col.m12.s12
                   = f.label :description, 'Descripción'
                   = f.text_area :description, placeholder: "Indicaciones para su preparación", class: 'materialize-textarea'
               .actions.center-align
-                = f.submit 'Crear', class: 'btn waves-effect waves-light white-text' 
+                = f.submit 'Crear', class: 'btn waves-effect waves-light white-text'
               %br/
           %table.centered.highlight
             %thead
@@ -250,7 +287,7 @@
                       gr
                     %td
                       = @plan.calculate_carbs(i)
-                      gr                    
+                      gr
                     %td
                       = @plan.calculate_fats(i)
                       gr
@@ -270,7 +307,7 @@
                             %th{width: "50%"} Descripción
                             -if @creator && current_user.active
                               %th{width: "10%"}
-                        %tbody             
+                        %tbody
                         - @foods_linked.where(:moment => momento).each do |food_day|
                           %tr
                             %td
@@ -301,9 +338,9 @@
                   = f.label :description, 'Descripción'
                   = f.text_area :description, placeholder: "Indicar las series, tiempo de descanso y explicación más detallada.", class: 'materialize-textarea'
               .actions.center-align
-                = f.submit 'Crear', class: 'btn waves-effect waves-light white-text' 
+                = f.submit 'Crear', class: 'btn waves-effect waves-light white-text'
             %br/
-            .divider                
+            .divider
           -if @exercises_linked.count > 0
             - (1..15).each do |i|
               -if @exercises_linked.where(:day => i).count != 0
@@ -316,7 +353,7 @@
                         %th{width: "60%"} Descripción
                         -if @creator && current_user.active
                           %th{width: "10%"}
-                    %tbody 
+                    %tbody
                     - @exercises_linked.where(:day => i).each do |exercise_day|
                       %tr
                         %td
@@ -327,4 +364,3 @@
                           %td
                             = link_to exercise_day, method: :delete, data: { confirm: '¿Estas seguro que deseas eliminar este ejercicio?' } do
                               %i.material-icons.black-text delete_forever
-              

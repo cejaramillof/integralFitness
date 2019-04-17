@@ -5,16 +5,22 @@
         language: {
             searchPlaceholder: "Por Nombre, Email o Teléfono",
             "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
-        }   
+        }
       });
-  } );  
+  } );
 .row
   .col.s12.m12.l12
     .card
       .card-content
+        .row
+          .col.s8.center-align
+            %span.card-title Lista de Asesorados
+            %small (Click en el nombre para editar)
+          .col.s4.right-align
+            = link_to new_guest_path, class: 'btn waves-effect waves-light btn-flat h5-padding' do
+              Crear
         .center-align
-          %span.card-title Lista de Asesorados
-          %small (Click en el nombre para editar)
+
         .row
           %table.center-align.datatable.striped.nowrap{:id => "display no-wrap"}
             %thead
@@ -24,7 +30,7 @@
                 %th.hide Phone
                 %th Próximo Plan
                 %th
-          
+
             %tbody
               - @guests.each do |guest|
                 %tr
@@ -39,5 +45,3 @@
                       %i.material-icons.black-text delete_forever
 
 %br
-
-= link_to 'New Guest', new_guest_path

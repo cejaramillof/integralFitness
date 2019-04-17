@@ -2,14 +2,17 @@
   .col.s12
     .card
       .card-content.center-align
-        %h5.center-align.card-title 
+        %h5.center-align.card-title
           Lista de Alimentos
+        -if current_user
+          = link_to new_food_path, class: 'btn waves-effect waves-light h5-padding white-text' do
+            Crear Alimento          
         .row
           .col.s6.m4.l4.xl3.center-align
             = link_to foods_path(group: 'SUPLEMENTOS') do
               %br/
               %b Suplementos
-              =image_tag $base_url + "imgEserciziEVF/foods/suples.svg", class: 'food-image' 
+              =image_tag $base_url + "imgEserciziEVF/foods/suples.svg", class: 'food-image'
           .col.s6.m4.l4.xl3.center-align
             = link_to foods_path(group: 'CEREALES') do
               %br/
@@ -69,7 +72,7 @@
             = link_to foods_path(group: 'CERDO') do
               %br/
               %b Cerdo
-              =image_tag $base_url + "imgEserciziEVF/foods/cerdo.svg", class: 'food-image'   
+              =image_tag $base_url + "imgEserciziEVF/foods/cerdo.svg", class: 'food-image'
           .col.s6.m4.l4.xl3.center-align
             = link_to foods_path(group: 'CORDERO') do
               %br/
@@ -104,8 +107,5 @@
             = link_to foods_path(group: 'CAZA') do
               %br/
               %b Caza
-              =image_tag $base_url + "imgEserciziEVF/foods/caza.svg", class: 'food-image' 
+              =image_tag $base_url + "imgEserciziEVF/foods/caza.svg", class: 'food-image'
           .row.center-align
-          -if current_user
-            = link_to new_food_path, class: 'btn waves-effect waves-light h5-padding white-text' do
-              Crear Alimento

@@ -5,10 +5,10 @@
         language: {
             searchPlaceholder: "Busca aquí",
             "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
-        }   
+        }
       });
   } );
-  
+
 .row
   .col.s12
     .card
@@ -18,13 +18,13 @@
             = @foods.first&.group
             %br/
             %small (100gramos)
-        .row  
+        .row
           %table.datatable.striped.responsive.no-wrap
             %thead
               %tr
                 %th Nombre
-                %th Carbs
                 %th Prote
+                %th Carbs
                 %th Grasas
             %tbody
               - @foods.each do |food|
@@ -36,6 +36,6 @@
                     %span
                       = food.name.capitalize
                       %small= "( #{food.status.downcase} )"
+                  %td= food.proteins                      
                   %td= food.carbohydrates
-                  %td= food.proteins
                   %td= food.fats
