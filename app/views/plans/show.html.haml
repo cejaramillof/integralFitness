@@ -257,41 +257,42 @@
               .actions.center-align
                 = f.submit 'Crear', class: 'btn waves-effect waves-light white-text'
               %br/
-          %table.centered.highlight
-            %thead
-              %th Día
-              %th KCALS
-              %th Proteinas
-              %th Carbohidratos
-              %th Grasas
-            %tbody
-              %tr
-                %td Base
-                %td= @plan.kcal
-                %td
-                  = @plan.gr_proteins
-                  gr
-                %td
-                  = @plan.gr_carbs
-                  gr
-                %td
-                  = @plan.gr_fats
-                  gr
-              - (1..7).each do |i|
-                -if @foods_linked.where(:day => i).count != 0
-                  %tr
-                    %td= i
-                    %td= @plan.calculate_kcals(i)
-                    %td
-                      = @plan.calculate_proteins(i)
-                      gr
-                    %td
-                      = @plan.calculate_carbs(i)
-                      gr
-                    %td
-                      = @plan.calculate_fats(i)
-                      gr
-          -if @foods_linked.count > 0
+          #food_print
+            %table.centered.highlight
+              %thead
+                %th Día
+                %th KCALS
+                %th Proteinas
+                %th Carbohidratos
+                %th Grasas
+              %tbody
+                %tr
+                  %td Base
+                  %td= @plan.kcal
+                  %td
+                    = @plan.gr_proteins
+                    gr
+                  %td
+                    = @plan.gr_carbs
+                    gr
+                  %td
+                    = @plan.gr_fats
+                    gr
+                - (1..7).each do |i|
+                  -if @foods_linked.where(:day => i).count != 0
+                    %tr
+                      %td= i
+                      %td= @plan.calculate_kcals(i)
+                      %td
+                        = @plan.calculate_proteins(i)
+                        gr
+                      %td
+                        = @plan.calculate_carbs(i)
+                        gr
+                      %td
+                        = @plan.calculate_fats(i)
+                        gr
+            -if @foods_linked.count > 0
             %br/
             - (1..7).each do |i|
               -if @foods_linked.where(:day => i).count != 0
@@ -319,7 +320,7 @@
                               gr
                             %td= food_day.description.capitalize
                             -if @creator && current_user.active
-                              %td
+                              %td.delete_one
                                 = link_to food_day, method: :delete, data: { confirm: '¿Estas seguro que deseas eliminar este alimento?' } do
                                   %i.material-icons.black-text delete_forever
         #exercise_view
@@ -340,27 +341,28 @@
               .actions.center-align
                 = f.submit 'Crear', class: 'btn waves-effect waves-light white-text'
             %br/
-            .divider
-          -if @exercises_linked.count > 0
-            - (1..15).each do |i|
-              -if @exercises_linked.where(:day => i).count != 0
-                .row
-                  %h5= "Día de Ejercicio #{i}"
-                  %table
-                    %thead
-                      %tr
-                        %th{width: "30%"} Ejercicio
-                        %th{width: "60%"} Descripción
-                        -if @creator && current_user.active
-                          %th{width: "10%"}
-                    %tbody
-                    - @exercises_linked.where(:day => i).each do |exercise_day|
-                      %tr
-                        %td
-                          = link_to exercise_day.exercise, target: :_blank do
-                            %p= exercise_day.exercise.descrizione.capitalize
-                        %td= exercise_day.description.capitalize
-                        -if @creator && current_user.active
-                          %td
-                            = link_to exercise_day, method: :delete, data: { confirm: '¿Estas seguro que deseas eliminar este ejercicio?' } do
-                              %i.material-icons.black-text delete_forever
+            #exercise_print
+              .divider
+              -if @exercises_linked.count > 0
+                - (1..15).each do |i|
+                  -if @exercises_linked.where(:day => i).count != 0
+                    .row
+                      %h5= "Día de Ejercicio #{i}"
+                      %table
+                        %thead
+                          %tr
+                            %th{width: "30%"} Ejercicio
+                            %th{width: "60%"} Descripción
+                            -if @creator && current_user.active
+                              %th{width: "10%"}
+                        %tbody
+                        - @exercises_linked.where(:day => i).each do |exercise_day|
+                          %tr
+                            %td
+                              = link_to exercise_day.exercise, target: :_blank do
+                                %p= exercise_day.exercise.descrizione.capitalize
+                            %td= exercise_day.description.capitalize
+                            -if @creator && current_user.active
+                              %td.delete_one
+                                = link_to exercise_day, method: :delete, data: { confirm: '¿Estas seguro que deseas eliminar este ejercicio?' } do
+                                  %i.material-icons.black-text delete_forever
