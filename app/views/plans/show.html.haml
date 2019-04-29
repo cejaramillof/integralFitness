@@ -1,4 +1,7 @@
 :javascript
+  $('#print_plan').click(function(){
+    printDocument();
+  });
   function printDocument(){
     var content1 = document.getElementById('plan_view').innerHTML;
     var content2 = document.getElementById('food_print').innerHTML;
@@ -6,8 +9,16 @@
     var combined = document.createElement('div');
     combined.innerHTML = content1 + " " + content2 + " " + content3;
     combined.id = 'new';
-    newWin= window.open("");
-    newWin.document.write(combined.outerHTML);
+    printElem(combined);
+  }
+  function printElem(content) {
+    var mywindow = window.open('', 'Print', 'height=600,width=800');
+    mywindow.document.write(content);
+    mywindow.document.close();
+    mywindow.focus()
+    mywindow.print();
+    mywindow.close();
+    return true;
   }
   $(document).on('turbolinks:load', function() {
     var divLine = document.getElementById("line-chart");
@@ -376,3 +387,6 @@
                               %td.delete_one
                                 = link_to exercise_day, method: :delete, data: { confirm: '¿Estas seguro que deseas eliminar este ejercicio?' } do
                                   %i.material-icons.black-text delete_forever
+
+        .center-align
+          %a.btn.waves-effect.waves-light.white-text#print_plan IMPRIMIR
