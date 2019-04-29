@@ -24,7 +24,7 @@ class PlansController < ApplicationController
     @fat_mass = plans.pluck(:fat_mass)
     #arr.map(&:email)
     @date = plans.pluck(:created_at).map{ |date| date.strftime("%d %b %Y") }
-    
+
     @exercises = Exercise.all
     @exercise_day = ExerciseDay.new
     default_foods = Food.where(default: true)
@@ -33,6 +33,9 @@ class PlansController < ApplicationController
     @food_day = FoodDay.new
     @exercises_linked = @plan.exercise_day
     @foods_linked = @plan.food_day
+    if params[:print]
+        render partial: "print", layout: "print"
+    end
   end
 
   # GET /plans/new

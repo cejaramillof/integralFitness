@@ -1,25 +1,4 @@
 :javascript
-  $('#print_plan').click(function(){
-    printDocument();
-  });
-  function printDocument(){
-    var content1 = document.getElementById('plan_view').innerHTML;
-    var content2 = document.getElementById('food_print').innerHTML;
-    var content3 = document.getElementById('exercise_print').innerHTML;
-    var combined = document.createElement('div');
-    combined.innerHTML = content1 + " " + content2 + " " + content3;
-    combined.id = 'new';
-    printElem(combined);
-  }
-  function printElem(content) {
-    var mywindow = window.open('', 'Print', 'height=600,width=800');
-    mywindow.document.write(content);
-    mywindow.document.close();
-    mywindow.focus()
-    mywindow.print();
-    mywindow.close();
-    return true;
-  }
   $(document).on('turbolinks:load', function() {
     var divLine = document.getElementById("line-chart");
     new Chart(divLine.getContext("2d"), {
