@@ -303,36 +303,36 @@
                         = @plan.calculate_fats(i)
                         gr
             -if @foods_linked.count > 0
-            %br/
-            - (1..7).each do |i|
-              -if @foods_linked.where(:day => i).count != 0
-                - FoodDay.moments.keys.to_a.each do |momento|
-                  -if @foods_linked.where(:moment => momento, :day => i).count != 0
-                    .row
-                      %h5= "#{momento} - Día #{i}"
-                      %table
-                        %thead
-                          %tr
-                            %th{width: "25%"} Alimento
-                            %th{width: "25%"} Gramos
-                            %th{width: "50%"} Descripción
-                            -if @creator && current_user.active
-                              %th{width: "10%"}
-                        %tbody
-                        - @foods_linked.where(:moment => momento).each do |food_day|
-                          %tr
-                            %td
-                              %p
-                                = food_day.food.name.capitalize
-                                = (food_day.food.status.blank? ? "" : "( #{food_day.food.status.downcase} )")
-                            %td
-                              = food_day.weight
-                              gr
-                            %td= food_day.description.capitalize
-                            -if @creator && current_user.active
-                              %td.delete_one
-                                = link_to food_day, method: :delete, data: { confirm: '¿Estas seguro que deseas eliminar este alimento?' } do
-                                  %i.material-icons.black-text delete_forever
+              %br/
+              - (1..7).each do |i|
+                -if @foods_linked.where(:day => i).count != 0
+                  - FoodDay.moments.keys.to_a.each do |momento|
+                    -if @foods_linked.where(:moment => momento, :day => i).count != 0
+                      .row
+                        %h5= "#{momento} - Día #{i}"
+                        %table
+                          %thead
+                            %tr
+                              %th{width: "25%"} Alimento
+                              %th{width: "25%"} Gramos
+                              %th{width: "50%"} Descripción
+                              -if @creator && current_user.active
+                                %th{width: "10%"}
+                          %tbody
+                          - @foods_linked.where(:moment => momento).each do |food_day|
+                            %tr
+                              %td
+                                %p
+                                  = food_day.food.name.capitalize
+                                  = (food_day.food.status.blank? ? "" : "( #{food_day.food.status.downcase} )")
+                              %td
+                                = food_day.weight
+                                gr
+                              %td= food_day.description.capitalize
+                              -if @creator && current_user.active
+                                %td.delete_one
+                                  = link_to food_day, method: :delete, data: { confirm: '¿Estas seguro que deseas eliminar este alimento?' } do
+                                    %i.material-icons.black-text delete_forever
         #exercise_view
           -if @creator && current_user.active
             %h6.card-title Agregar Ejercicio
