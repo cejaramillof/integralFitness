@@ -310,3 +310,8 @@ a:active {
     display: block;
   }
 }
+
+@media print {
+  .page-break { display: block; page-break-before: auto; }
+  .delete_one { display: none; }
+}
