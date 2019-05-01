@@ -68,7 +68,7 @@
       %h5.card-title
         Resumen del Plan
       %span.card-title
-        Plan (
+        (
         %small= @plan.created_at.strftime("%d/%m/%g")
         - if !@plan.guest.next.blank?
           \-
@@ -185,6 +185,8 @@
       .col.s12.m7
         %canvas#polar-chart{width: "100%", height:"100%"}
   #food_print
+    %br/
+    %br/
     .center-align
       %h5.card-title
         Plan Alimentario
@@ -248,6 +250,8 @@
                         gr
                       %td= food_day.description.capitalize
   #exercise_print
+    %br/
+    %br/
     .center-align
       %h5.card-title
         Plan de Entrenamiento
