@@ -81,9 +81,9 @@
             %small= @plan.guest.next&.strftime("%d/%m/%g")
           )
       .row.valign-wrapper
-        .col.s12.m7
-          %canvas#line-chart{width: "100%", height:"100%", data: { weight: @weights, lean: @lean_mass, fat: @fat_mass, date: @date }}
         .col.s12.m5
+          %canvas#line-chart{width: "100%", height:"100%", data: { weight: @weights, lean: @lean_mass, fat: @fat_mass, date: @date }}
+        .col.s12.m5.offset-m2
           %h5 Info. Asesorado
           .divider
           %br/
@@ -188,7 +188,7 @@
           - if !@plan.description.blank?
             %b Descripción:
             %p=@plan.description
-        .col.s12.m7
+        .col.s12.m5.offset-m2
           %canvas#polar-chart{width: "100%", height:"100%"}
     #food_print
       %br/
