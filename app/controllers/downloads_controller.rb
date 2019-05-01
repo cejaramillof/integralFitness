@@ -1,4 +1,4 @@
-class DownloadsController < Devise::RegistrationsController
+class DownloadsController < ApplicationController
   layout "print"
   before_action :set_plan, only: [:show]
   def show
