@@ -54,6 +54,11 @@
           ]
         },
         options: {
+          animation: {
+            onComplete: function() {
+              window.print();
+            }
+         },
           title: {
             display: true,
             responsive: true,
