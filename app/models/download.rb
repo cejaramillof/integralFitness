@@ -1,0 +1,3 @@
+class Download < ApplicationRecord
+
+end

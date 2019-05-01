@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :exercises, only: [:show, :index]
   resources :plans, only: [:create, :index, :destroy, :show, :new]
   resources :guests, except: [:show]
+  resources :downloads, only: [:show]
   
   devise_for :users, controllers: { registrations: 'registrations' }
   devise_scope :user do
