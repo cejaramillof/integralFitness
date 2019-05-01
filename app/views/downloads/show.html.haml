@@ -80,10 +80,8 @@
             \-
             %small= @plan.guest.next&.strftime("%d/%m/%g")
           )
-      .row.valign-wrapper
-        .col.s12.m5
-          %canvas#line-chart{width: "100%", height:"100%", data: { weight: @weights, lean: @lean_mass, fat: @fat_mass, date: @date }}
-        .col.s12.m5.offset-m2
+      .row
+        .col.s12.m6
           %h5 Info. Asesorado
           .divider
           %br/
@@ -137,9 +135,7 @@
                 %span
                   = @plan.fats
                   \%
-      .row.valign-wrapper
-        %br/
-        .col.s12.m5
+        .col.s12.m6
           %h5 Estadísticas Peso
           .divider
           %p
@@ -187,9 +183,15 @@
                   Kg
           - if !@plan.description.blank?
             %b Descripción:
-            %p=@plan.description
-        .col.s12.m5.offset-m2
+            %p=@plan.descriptio6
+
+      .row.valign-wrapper
+        %br/
+        .col.s12.m6
+          %canvas#line-chart{width: "100%", height:"100%", data: { weight: @weights, lean: @lean_mass, fat: @fat_mass, date: @date }}
+        .col.s12.m6
           %canvas#polar-chart{width: "100%", height:"100%"}
+    .page-break
     #food_print
       %br/
       %br/
@@ -255,6 +257,7 @@
                           = food_day.weight
                           gr
                         %td= food_day.description.capitalize
+    .page-break
     #exercise_print
       %br/
       %br/
