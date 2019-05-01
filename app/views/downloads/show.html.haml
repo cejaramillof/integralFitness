@@ -65,6 +65,8 @@
 .row
   #plan_view
     .center-align
+      %h5.card-title
+        Resumen del Plan
       %span.card-title
         Plan (
         %small= @plan.created_at.strftime("%d/%m/%g")
@@ -183,6 +185,9 @@
       .col.s12.m7
         %canvas#polar-chart{width: "100%", height:"100%"}
   #food_print
+    .center-align
+      %h5.card-title
+        Plan Alimentario
     %table.centered.highlight
       %thead
         %th Día
@@ -243,6 +248,9 @@
                         gr
                       %td= food_day.description.capitalize
   #exercise_print
+    .center-align
+      %h5.card-title
+        Plan de Entrenamiento
     .divider
     -if @exercises_linked.count > 0
       - (1..15).each do |i|
