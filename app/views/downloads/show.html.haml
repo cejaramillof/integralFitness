@@ -100,7 +100,7 @@
                   }
                   var percent = String(Math.round(dataset.data[i]/total*100)) + "%";
                   //Don't Display If Legend is hide or value is 0
-                  if(dataset.data[i] != 0 && dataset._meta[0].data[i].hidden != true) {
+                  if(dataset.data[i] != 0) {
                     ctx.fillText(dataset.data[i], model.x + x, model.y + y);
                     // Display percent in another line, line break doesn't work for fillText
                     ctx.fillText(percent, model.x + x, model.y + y + 15);
