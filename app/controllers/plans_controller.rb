@@ -41,6 +41,7 @@ class PlansController < ApplicationController
   # GET /plans/new
   def new
     @plan = Plan.new
+    @default = params[:guest_id]
     @guests = current_user.guests.all
   end
 

@@ -26,7 +26,7 @@ class GuestsController < ApplicationController
 
     respond_to do |format|
       if @guest.save
-        format.html { redirect_to guests_path, notice: 'Asesorado creado.' }
+        format.html { redirect_to new_plan_path(guest_id: @guest.id), notice: 'Asesorado creado.' }
         format.json { render :index, status: :created, location: @guest }
       else
         format.html { render :new }
