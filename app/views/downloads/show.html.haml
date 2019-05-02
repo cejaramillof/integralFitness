@@ -322,15 +322,17 @@
             -if @exercises_linked.where(:day => i).count != 0
               .row
                 %h5= "Día de Ejercicio #{i}"
-                %table
-                  %thead
-                    %tr
-                      %th{width: "30%"} Ejercicio
-                      %th{width: "60%"} Descripción
-                  %tbody
-                  - @exercises_linked.where(:day => i).each do |exercise_day|
-                    %tr
-                      %td
-                        = link_to exercise_day.exercise, target: :_blank do
-                          %p= exercise_day.exercise.descrizione.capitalize
-                      %td= exercise_day.description.capitalize
+                - @exercises_linked.where(:day => i).each do |exercise_day|
+                  .row
+                    .col.s6
+                      %b Ejercicio:
+                      %p= exercise_day.exercise.descrizione.capitalize
+                    .col.s6
+                      %b Descripción:
+                      %p= exercise_day.description.capitalize
+                  .row
+                    .col.s6
+                      = image_tag($base_url.to_s + exercise_day.exercise.fotoA.to_s, class: "responsive-img")
+                    .col.s6
+                      = image_tag($base_url.to_s + exercise_day.exercise.fotoB.to_s, class: "responsive-img")
+                  .divider
