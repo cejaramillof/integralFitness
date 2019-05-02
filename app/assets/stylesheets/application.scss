@@ -312,6 +312,6 @@ a:active {
 }
 
 @media print {
-  .page-break { display: block; page-break-before: auto; }
+  .page-break { page-break-before: always; }
   .delete_one { display: none; }
 }
