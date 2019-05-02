@@ -309,7 +309,7 @@
                               -if @creator && current_user.active
                                 %th{width: "10%"}
                           %tbody
-                          - @foods_linked.where(:moment => momento).each do |food_day|
+                          - @foods_linked.where(:moment => momento, :day => i).each do |food_day|
                             %tr
                               %td
                                 %p
@@ -368,5 +368,5 @@
                                   %i.material-icons.black-text delete_forever
 
         .center-align
-          = link_to download_url(@plan), class: 'btn waves-effect waves-light white-text' do
+          = link_to download_url(@plan), class: 'btn waves-effect waves-light white-text', target: :_blank do
             IMPRIMIR

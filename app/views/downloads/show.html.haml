@@ -299,7 +299,7 @@
                           %th{width: "25%"} Gramos
                           %th{width: "50%"} Descripción
                       %tbody
-                      - @foods_linked.where(:moment => momento).each do |food_day|
+                      - @foods_linked.where(:moment => momento, :day => i).each do |food_day|
                         %tr
                           %td
                             %p
