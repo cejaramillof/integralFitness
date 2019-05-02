@@ -69,7 +69,7 @@
     .row
       .col.s12
         = f.label :guest, 'Correo del Asesorado'
-        = f.select :guest_id, @guests.collect{ |u| [u.email, u.id, {'data-gender' => u.gender, 'data-age' => u.age, 'data-height' => u.height}] }, {:include_blank => 'Asesorados'}, :required => true, :selected => (@default || nil), class: 'select-two'
+        = f.select :guest_id, @guests.collect{ |u| [u.email, u.id, {'data-gender' => u.gender, 'data-age' => u.age, 'data-height' => u.height}] }, :required => true, :selected => @default, :class => 'select-two'
     .row
       .col.m6.s12
         = f.label :goal, 'Objetivo'
@@ -105,16 +105,16 @@
     .row
       .col.m3.s12
         = f.label :proteins, '% Proteinas'
-        = f.select :proteins, (0..100), required: true, class: 'scroll-bubble'
+        = f.select :proteins, (0..100), required: true, :class => 'scroll-bubble'
       .col.m3.s12
         = f.label :carbs, '% Carbohidratos'
-        = f.select :carbs, (0..100), required: true, class: 'scroll-bubble'
+        = f.select :carbs, (0..100), required: true, :class => 'scroll-bubble'
       .col.m3.s12
         = f.label :fats, '% Grasas'
-        = f.select :fats, (0..100), required: true, class: 'scroll-bubble'
+        = f.select :fats, (0..100), required: true, :class => 'scroll-bubble'
       .col.m3.s12
         = f.label :variation, '% Variacion total KCAL'
-        = f.select :variation, (0..100), required: true, class: 'scroll-bubble'
+        = f.select :variation, (0..100), required: true, :class => 'scroll-bubble'
     .row        
       .col.m6.s12
         = f.label :description, 'Descripción'
