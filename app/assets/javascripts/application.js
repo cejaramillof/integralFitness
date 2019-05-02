@@ -30,7 +30,7 @@ $(document).on("turbolinks:before-visit turbolinks:before-cache", function() {
 
 $(document).on("turbolinks:load", function() {  
     M.Modal._count = 0;
-    $('select').select2({
+    $('.select-two').select2({
         language: {
             noResults: function (params) {
                 return "No existe.";

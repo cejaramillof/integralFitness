@@ -69,7 +69,7 @@
     .row
       .col.s12
         = f.label :guest, 'Correo del Asesorado'
-        = f.select :guest_id, @guests.collect{ |u| [u.email, u.id, {'data-gender' => u.gender, 'data-age' => u.age, 'data-height' => u.height}] }, {:include_blank => 'Asesorados'}, :required => true, selected: @default || nil
+        = f.select :guest_id, @guests.collect{ |u| [u.email, u.id, {'data-gender' => u.gender, 'data-age' => u.age, 'data-height' => u.height}] }, {:include_blank => 'Asesorados'}, :required => true, :selected => (@default || nil), class: 'select-two'
     .row
       .col.m6.s12
         = f.label :goal, 'Objetivo'
