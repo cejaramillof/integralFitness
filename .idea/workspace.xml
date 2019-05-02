@@ -25,11 +25,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/plans/_form.html.haml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="221">
-              <caret line="71" column="70" lean-forward="true" selection-start-line="71" selection-start-column="70" selection-end-line="71" selection-end-column="70" />
+              <caret line="71" column="191" selection-start-line="71" selection-start-column="191" selection-end-line="71" selection-end-column="191" />
             </state>
           </provider>
         </entry>
@@ -55,11 +55,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/plans/show.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="229" column="45" lean-forward="true" selection-start-line="229" selection-start-column="45" selection-end-line="229" selection-end-column="45" />
+            <state relative-caret-position="390">
+              <caret line="227" column="33" lean-forward="true" selection-start-line="227" selection-start-column="33" selection-end-line="227" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -106,13 +106,15 @@
       <find>new_plan_</find>
       <find>plan</find>
       <find>default</find>
-      <find>f.select</find>
       <find>, class: 'scroll-bubble'</find>
       <find>, class: 'select-two'</find>
       <find>select</find>
+      <find>f.select</find>
     </findStrings>
     <replaceStrings>
       <replace>, :class =&gt; 'scroll-bubble'</replace>
+      <replace>, { :class =&gt; 'select-two'</replace>
+      <replace>, { :class =&gt; 'select-two' }</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\Users\Admin\Desktop\integralFitness\app\views</dir>
@@ -132,8 +134,8 @@
         <option value="$PROJECT_DIR$/app/controllers/plans_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/guests_controller.rb" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/application.js" />
-        <option value="$PROJECT_DIR$/app/views/plans/_form.html.haml" />
         <option value="$PROJECT_DIR$/app/views/plans/show.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/plans/_form.html.haml" />
       </list>
     </option>
   </component>
@@ -209,12 +211,12 @@
       <workItem from="1556746919987" duration="11798000" />
       <workItem from="1556770473432" duration="666000" />
       <workItem from="1556803082628" duration="106000" />
-      <workItem from="1556836210210" duration="2580000" />
+      <workItem from="1556836210210" duration="2840000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16892000" />
+    <option name="totallyTimeSpent" value="17152000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -386,13 +388,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/plans/_form.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="71" column="70" lean-forward="true" selection-start-line="71" selection-start-column="70" selection-end-line="71" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/downloads/show.html.haml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
@@ -402,8 +397,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/plans/show.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="229" column="45" lean-forward="true" selection-start-line="229" selection-start-column="45" selection-end-line="229" selection-end-column="45" />
+        <state relative-caret-position="390">
+          <caret line="227" column="33" lean-forward="true" selection-start-line="227" selection-start-column="33" selection-end-line="227" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/plans/_form.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="71" column="191" selection-start-line="71" selection-start-column="191" selection-end-line="71" selection-end-column="191" />
         </state>
       </provider>
     </entry>
