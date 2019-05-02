@@ -32,9 +32,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/downloads/show.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="185" column="32" selection-start-line="185" selection-start-column="32" selection-end-line="185" selection-end-column="32" />
+            <state relative-caret-position="113">
+              <caret line="137" column="29" selection-start-line="137" selection-start-column="29" selection-end-line="137" selection-end-column="29" />
               <folding>
+                <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
                 <element signature="n#p#3;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
                 <element signature="n#div#1;n#div#0;n#div#1;n#!!top" />
                 <element signature="n#div#2;n#div#0;n#div#1;n#!!top" />
@@ -219,12 +220,12 @@
       <option name="presentableId" value="Default" />
       <updated>1556726265484</updated>
       <workItem from="1556726266658" duration="1742000" />
-      <workItem from="1556746919987" duration="5016000" />
+      <workItem from="1556746919987" duration="5222000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6758000" />
+    <option name="totallyTimeSpent" value="6964000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -364,9 +365,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/downloads/show.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="185" column="32" selection-start-line="185" selection-start-column="32" selection-end-line="185" selection-end-column="32" />
+        <state relative-caret-position="113">
+          <caret line="137" column="29" selection-start-line="137" selection-start-column="29" selection-end-line="137" selection-end-column="29" />
           <folding>
+            <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
             <element signature="n#p#3;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
             <element signature="n#div#1;n#div#0;n#div#1;n#!!top" />
             <element signature="n#div#2;n#div#0;n#div#1;n#!!top" />
