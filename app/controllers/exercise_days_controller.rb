@@ -12,7 +12,7 @@ class ExerciseDaysController < ApplicationController
         format.html { redirect_to plan_path(@exercise_day.plan, anchor: 'exercise_view'), notice: 'Ejercicio Añadido.' }
         format.json { render :show, status: :created, location: @exercise_day }
       else
-        format.html { render :new }
+        format.html { redirect_to plan_path(@exercise_day.plan, anchor: 'exercise_view'), notice: 'Error' }
         format.json { render json: @exercise_day.errors, status: :unprocessable_entity }
       end
     end

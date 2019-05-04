@@ -1,26 +1,17 @@
 :javascript
+  $(window).load(function(){
+    GetGuest();
+    volumen_vals();
+  });  
+  
   $(document).on("keydown", "#plan_weight", function(e){
      $(".medir-g").removeClass("disabled");
      $(".medir-g").removeClass("disabled");
   });  
   $(document).on("change", "select#plan_guest_id", function(e){
-     asesorado = $("select#plan_guest_id").val();
-     if (asesorado != "") {
-       gender = $("select#plan_guest_id").find(":selected").attr("data-gender");
-       age = $("select#plan_guest_id").find(":selected").attr("data-age");
-       height = $("select#plan_guest_id").find(":selected").attr("data-height");
-       weight = $("#plan_weight").val();
-       
-       if (gender == false ) {
-         $(".hombre-b").removeClass("hide");
-         $(".mujer-b").addClass("hide");
-       }else{
-         $(".mujer-b").removeClass("hide");
-         $(".hombre-b").addClass("hide");
-       }
-     }
+    GetGuest();
   });
-  
+    
   $(document).on("change", "#input_2, #input_1", function(e){
      neck = $("#input_1").val();
      waist = $("#input_2").val();     
@@ -37,24 +28,83 @@
   });
   
   $(document).on("click", "#plan_goal_definicion", function(e){
-     $("#plan_proteins").val(45);
-     $("#plan_carbs").val(25);
-     $("#plan_fats").val(30);
-     $("#plan_variation").val(-20);
+    definicion_vals(); 
   });
   $(document).on("click", "#plan_goal_mantenimiento", function(e){
+    mantenimiento_vals()
+  });
+  $(document).on("click", "#plan_goal_volumen", function(e){
+    volumen_vals();
+  });
+  
+  function GetGuest() {
+     asesorado = $("select#plan_guest_id").val();
+     if (asesorado != "") {
+       gender = $("select#plan_guest_id").find(":selected").attr("data-gender");
+       age = $("select#plan_guest_id").find(":selected").attr("data-age");
+       height = $("select#plan_guest_id").find(":selected").attr("data-height");
+       weight = $("#plan_weight").val();
+       
+       if (gender == false ) {
+         $(".hombre-b").removeClass("hide");
+         $(".mujer-b").addClass("hide");
+       }else{
+         $(".mujer-b").removeClass("hide");
+         $(".hombre-b").addClass("hide");
+       }
+     }    
+  };
+  
+  function volumen_vals() {
+      $("#plan_proteins_dummy").val(25);
+      $("#plan_carbs_dummy").val(45);
+      $("#plan_fats_dummy").val(30);
+      $("#plan_variation_dummy").val(20);
+      
+      $("#plan_proteins").val(25);
+      $("#plan_carbs").val(45);
+      $("#plan_fats").val(30);
+      $("#plan_variation").val(20);      
+
+      $("#plan_proteins").mobiscroll('setVal', 25);
+      $("#plan_carbs").mobiscroll('setVal', 45);
+      $("#plan_fats").mobiscroll('setVal', 30);
+      $("#plan_variation").mobiscroll('setVal', 20);     
+  };
+  
+  function mantenimiento_vals() {
+     $("#plan_proteins_dummy").val(25);
+     $("#plan_carbs_dummy").val(40);
+     $("#plan_fats_dummy").val(35);
+     $("#plan_variation_dummy").val(0);
+     
      $("#plan_proteins").val(25);
      $("#plan_carbs").val(40);
      $("#plan_fats").val(35);
-     $("#plan_variation").val(0);
-  });
-  $(document).on("click", "#plan_goal_volumen", function(e){
-     $("#plan_proteins").val(25);
-     $("#plan_carbs").val(45);
-     $("#plan_fats").val(30);
-     $("#plan_variation").val(20);
-  });   
+     $("#plan_variation").val(0);     
+     
+     $("#plan_proteins").mobiscroll('setVal', 25);
+     $("#plan_carbs").mobiscroll('setVal', 40);
+     $("#plan_fats").mobiscroll('setVal', 35);
+     $("#plan_variation").mobiscroll('setVal', 0);     
+  };
 
+  function definicion_vals {
+     $("#plan_proteins_dummy").val(45);
+     $("#plan_carbs_dummy").val(25);
+     $("#plan_fats_dummy").val(30);
+     $("#plan_variation_dummy").val(-20);
+     
+     $("#plan_proteins").val(45);
+     $("#plan_carbs").val(25);
+     $("#plan_fats").val(30);
+     $("#plan_variation").val(-20);     
+  
+     $("#plan_proteins").mobiscroll('setVal', 45);
+     $("#plan_carbs").mobiscroll('setVal', 25);
+     $("#plan_fats").mobiscroll('setVal', 30);
+     $("#plan_variation").mobiscroll('setVal', -20);   
+  }
 .col.s12
   = form_for @plan do |f|
     - if @plan.errors.any?
@@ -69,7 +119,7 @@
     .row
       .col.s12
         = f.label :guest, 'Correo del Asesorado'
-        = f.select(:guest_id, @guests.collect{ |u| [u.email, u.id, {'data-gender' => u.gender, 'data-age' => u.age, 'data-height' => u.height}] }, :required => true, { :selected => @default }, { :class => 'select-two' })
+        = f.select(:guest_id, @guests.collect{ |u| [u.email, u.id, {'data-gender' => u.gender, 'data-age' => u.age, 'data-height' => u.height}] }, { :selected => @default, :required => true  }, { :class => 'select-two' })
     .row
       .col.m6.s12
         = f.label :goal, 'Objetivo'
@@ -105,16 +155,16 @@
     .row
       .col.m3.s12
         = f.label :proteins, '% Proteinas'
-        = f.select(:proteins, (0..100), required: true, { :class => 'scroll-bubble' })
+        = f.select(:proteins, (0..100), { required: true }, { :class => 'scroll-bubble' })
       .col.m3.s12
         = f.label :carbs, '% Carbohidratos'
-        = f.select(:carbs, (0..100), required: true, { :class => 'scroll-bubble' })
+        = f.select(:carbs, (0..100), { required: true }, { :class => 'scroll-bubble' })
       .col.m3.s12
         = f.label :fats, '% Grasas'
-        = f.select(:fats, (0..100), required: true, { :class => 'scroll-bubble' })
+        = f.select(:fats, (0..100), { required: true }, { :class => 'scroll-bubble' })
       .col.m3.s12
         = f.label :variation, '% Variacion total KCAL'
-        = f.select(:variation, (0..100), required: true, { :class => 'scroll-bubble' })
+        = f.select(:variation, (-100..100), { required: true, :selected => 0 }, { :class => 'scroll-bubble' })
     .row        
       .col.m6.s12
         = f.label :description, 'Descripción'

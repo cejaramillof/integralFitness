@@ -42,12 +42,12 @@
       %label{class: "active"} Fecha de Nacimiento
       %br
       .col.s10.offset-s1
-        = f.date_select :dob, {required: true, :start_year => Date.current.year, :end_year => 1920, :use_month_names => ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre','Diciembre']}
+        = f.date_select :dob, {:required => true, :start_year => Date.current.year, :end_year => 1920, :use_month_names => ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre','Diciembre']}, {:class => "select-two"} 
     .input-field.col.s12.l6
       %label{class: "active"} Fecha Próximo Plan
       %br
       .col.s10.offset-s1
-        = f.date_select :next, {:start_year => Date.current.year,:start_month => Date.current.month + 1.month, :use_month_names => ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre','Diciembre']}
+        = f.date_select :next, {:selected => Date.today + 1.month, :start_year => Date.current.year, :use_month_names => ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre','Diciembre']}, {:class => "select-two"} 
   .col.s12.m12
     .actions.center-align
       =f.button 'Guardar', class: 'btn waves-effect waves-light white-text', type: :submit

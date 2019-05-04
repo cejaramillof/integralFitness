@@ -12,8 +12,7 @@ class FoodDaysController < ApplicationController
         format.html { redirect_to plan_path(@food_day.plan, anchor: 'food_view'), notice: 'Alimento Añadido.' }
         format.json { render :show, status: :created, location: @food_day }
       else
-        format.html { render :new }
-        format.json { render json: @food_day.errors, status: :unprocessable_entity }
+        format.html { redirect_to plan_path(@food_day.plan, anchor: 'food_view'), notice: 'Error.' }
       end
     end
   end

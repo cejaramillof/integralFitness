@@ -221,14 +221,14 @@
                 = f.hidden_field :plan_id, value: @plan.id
                 .col.s12.m6
                   = f.label :day, 'Día de la Semana'
-                  = f.select(:day, options_for_select(1..7), :required => true, { :class => 'select-two' })
+                  = f.select(:day, options_for_select(1..7), { :required => true }, { :class => 'scroll-bubble' })
                 .col.s12.m6
                   = f.label :day, 'Momento del Día'
-                  = f.select(:moment, FoodDay.moments.keys.to_a, :required => true, { :class => 'select-two' })
+                  = f.select(:moment, FoodDay.moments.keys.to_a, { :required => true }, { :class => 'scroll-bubble' })
               .row.valign-wrapper
                 .col.s12.m6
                   = f.label :food, 'Alimento'
-                  = f.select(:food_id, @foods.collect{ |u| [u.name.capitalize + (u.status.blank? ? "" : "( #{u.status.downcase} )"), u.id, {'data-proteins' => u.proteins, 'data-carbs' => u.carbohydrates, 'data-fats' => u.fats}] }, {:include_blank => 'Alimento'}, :required => true, { :class => 'select-two' } , selected: nil)
+                  = f.select(:food_id, @foods.collect{ |u| [u.name.capitalize + (u.status.blank? ? "" : "( #{u.status.downcase} )"), u.id, {'data-proteins' => u.proteins, 'data-carbs' => u.carbohydrates, 'data-fats' => u.fats}] }, {:include_blank => 'Alimento', :required => true, selected: nil}, { :class => 'select-two' })
                 .col.s12.m6
                   = f.label :weight, 'Gramos Alimento'
                   = f.number_field :weight, step: "1", placeholder: "Peso requerido en gr", value: "100", required: true
@@ -330,11 +330,11 @@
               .row
                 = f.hidden_field :plan_id, value: @plan.id
                 .col.s12.m6
-                  = f.label :day, 'Dia'
-                  = f.select(:day, options_for_select(1..15), { prompt: "Día de la Semana" }, :required => true, { :class => 'select-two' })
+                  = f.label :day, 'Dia de la Semana'
+                  = f.select(:day, options_for_select(1..15), { :required => true }, { :class => 'scroll-bubble' })
                 .col.s12.m6
                   = f.label :exercise, 'Ejercicio'
-                  = f.select(:exercise_id, @exercises.collect{ |u| [u.descrizione.capitalize + " (" + u.gruppo1 + ")", u.id] }, {:include_blank => 'Ejercicio'}, :required => true, selected: nil, { :class => 'select-two' })
+                  = f.select(:exercise_id, @exercises.collect{ |u| [u.descrizione.capitalize + " (" + u.gruppo1 + ")", u.id] }, {:include_blank => 'Ejercicio', selected: nil, :required => true }, {:class => 'select-two'})
                 .col.m12.s12
                   = f.label :description, 'Descripción'
                   = f.text_area :description, placeholder: "Indicar las series, tiempo de descanso y explicación más detallada.", class: 'materialize-textarea'
@@ -368,5 +368,6 @@
                                 %i.material-icons.black-text delete_forever
 
         .center-align
+          %br/
           = link_to download_url(@plan), class: 'btn waves-effect waves-light white-text', target: :_blank do
             IMPRIMIR

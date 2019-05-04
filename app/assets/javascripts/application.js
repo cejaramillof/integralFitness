@@ -42,7 +42,7 @@ $(document).on("turbolinks:load", function() {
     $('.sidenav').sidenav();
     M.updateTextFields();
     mobiscroll.settings = {
-        lang: 'en',             // Specify language like: lang: 'pl' or omit setting to use default
+        lang: 'es',             // Specify language like: lang: 'pl' or omit setting to use default
         theme: 'ios'            // Specify theme like: theme: 'ios' or omit setting to use default
     };
     // Mobiscroll Select initialization
