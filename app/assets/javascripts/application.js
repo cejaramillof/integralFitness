@@ -41,6 +41,7 @@ $(document).on("turbolinks:load", function() {
     $('.tooltipped').tooltip();
     $('.sidenav').sidenav();
     M.updateTextFields();
+    /* 
     mobiscroll.settings = {
         lang: 'es',             // Specify language like: lang: 'pl' or omit setting to use default
         theme: 'ios'            // Specify theme like: theme: 'ios' or omit setting to use default
@@ -49,6 +50,7 @@ $(document).on("turbolinks:load", function() {
     $('.scroll-bubble').mobiscroll().select({
         display: 'bubble'   // Specify display mode like: display: 'bottom' or omit setting to use default
     });
+    */
     $('.tabs').tabs();
     $('.datepicker').datepicker({
         firstDay: true,

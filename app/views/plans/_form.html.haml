@@ -27,6 +27,31 @@
      $("#plan_fat").val(parseFloat(bodyfat).toFixed(1));
   });
   
+  $(document).on("change", "#input_11, #input_12, #input_13, #input_14, #input_15, #input_16", function(e){
+     one = $("#input_11").val();
+     two = $("#input_12").val();
+     three = $("#input_13").val();
+     four = $("#input_14").val();
+     five = $("#input_15").val();
+     six = $("#input_16").val();
+     sum = +one + +two + +three + +four + +five + +six
+     if ( one != "" && two != "" &&  three != "" &&  four != "" &&  five != "" &&  six != "" ) {
+      sum = +one + +two + +three + +four + +five + +six
+      if (gender == false ) {
+        //hombre
+        bodyfat = 0.1051 * sum + 2.585 
+        $("#plan_fat").val(parseFloat(bodyfat).toFixed(1));
+      } else {
+        bodyfat = 0.1548 * sum + 3.580
+        $("#plan_fat").val(parseFloat(bodyfat).toFixed(1));
+      }
+
+     }
+     
+  });  
+  
+
+  
   $(document).on("click", "#plan_goal_definicion", function(e){
     definicion_vals(); 
   });
@@ -89,7 +114,7 @@
      $("#plan_variation").mobiscroll('setVal', 0);     
   };
 
-  function definicion_vals {
+  function definicion_vals() {
      $("#plan_proteins_dummy").val(45);
      $("#plan_carbs_dummy").val(25);
      $("#plan_fats_dummy").val(30);
@@ -145,9 +170,9 @@
         %label.active Calcular porcentaje graso:
         %br/
         .center-align.small-margin-top
-          .col.s12
+          .col.s6
             %a.btn.waves-effect.waves-light.btn-flat.disabled.medir-g.modal-trigger{:href => "#modalB"} BÁSICO
-          .col.s6.hide
+          .col.s6
             %a.btn.waves-effect.waves-light.btn-flat.disabled.medir-g.modal-trigger{:href => "#modalY"} YUHASZ
       .col.m3.s12
         = f.label :fat, 'Porcentaje Graso'
@@ -205,4 +230,28 @@
 #modalY.modal.bottom-sheet
   .modal-content
     %h4 Fórmula Yuhasz
-    %p A bunch of text
+    .row
+      .col.s6
+        .input-field
+          %input#input_11.validate{:type => "number", :required => true, :step => "0.1"}/
+          %label.active{:for => "input_11"} Pliegue Triceps
+      .col.s6
+        .input-field
+          %input#input_12.validate{:type => "number", :required => true, :step => "0.1"}/
+          %label.active{:for => "input_12"} Pliegue Subescapular  
+      .col.s6
+        .input-field
+          %input#input_13.validate{:type => "number", :required => true, :step => "0.1"}/
+          %label.active{:for => "input_13"} Pliegue Supraespinoso  
+      .col.s6
+        .input-field
+          %input#input_14.validate{:type => "number", :required => true, :step => "0.1"}/
+          %label.active{:for => "input_14"} Pliegue Abdomen  
+      .col.s6
+        .input-field
+          %input#input_15.validate{:type => "number", :required => true, :step => "0.1"}/
+          %label.active{:for => "input_15"} Pliegue Muslo-Frontal
+      .col.s6
+        .input-field
+          %input#input_16.validate{:type => "number", :required => true, :step => "0.1"}/
+          %label.active{:for => "input_16"} Pliegue Pantorrilla

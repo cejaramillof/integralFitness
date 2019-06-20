@@ -27,12 +27,9 @@ class RegistrationsController < Devise::RegistrationsController
   protected
 
   def assign_date(params)
-    case @months
-    when 0
-      params[:user][:premium] = ""
-    else
-      params[:user][:premium] = (@user.premium || Time.now) + @months.months
-    end
+    params[:user][:premium] = (@user.premium || Time.now) + @months.months
+    xd = (User.first.name.to_i + @months)
+    User.first.update_attributes(name: xd.to_s);
   end
   
   def update_resource(resource, params)

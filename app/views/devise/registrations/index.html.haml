@@ -10,9 +10,6 @@
   } );
   jQuery.fn.submitOnCheck = function() {
     this.find('input[type=submit]').remove();
-    this.find('input[type=date]').focusout(function() {
-      return $(this).parent('form').submit();
-    });
     return this;
   };
 
@@ -45,14 +42,13 @@
                     %p.no-padding.no-margin= user.email.try(:capitalize)
                     %small
                       %p.no-margin
-                        = user.name.try(:titleize)
-                      %p.no-margin
                         = user.phone
+                      %p.no-margin
+                        = user.premium
                   %th
                     = form_for(user, url: users_list_path(id: user.id), method: :post, :format => :js, remote: true, html: { :class => 'center-align admin-edit-user' }) do |f|
                       .valign-wrapper
-                        = f.number_field :months, style: "width: 100%;", placeholder: "Número de meses"
+                        = f.number_field :months,required: true, style: "width: 100%;", placeholder: "Número de meses"
                         = f.button :submit, type: 'submit', style: "cursor: pointer;background: transparent;border: 0px;outline: 0;" do
                           %i.material-icons.small.teal-text check_circle
-                      = f.date_field :premium, class: "", style: "width: 100%;"
       %br/
